@@ -11,9 +11,7 @@ if(req.method==="PUT"){
     const {username}=req.body;
     await User.findByIdAndUpdate(session.user.id, {username})
     res.json('ok');
-    //res.json({"Username updated to ":username});
-    
-    res.json({username});}
+}
     if(req.method==="GET"){
         const id=req.query.id
         const user = await User.findById(id);

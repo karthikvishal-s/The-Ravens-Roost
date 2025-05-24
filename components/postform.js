@@ -1,12 +1,27 @@
 
 import useUserInfo from "@/hooks/useUserInfo";
+import { useState } from "react";
+import axios from "axios";
 
 
 export default function Postform(){
     const { userInfo, status} = useUserInfo();
-    console.log("Postform userInfo", userInfo);
+    const [text,setText] = useState("");
+
+  async function handlePostSubmit(e){
+    e.preventDefault();
+    await axios.post('api/posts', {
+      text,
+    })
+  console.log("Post submitted:", text);
+  }
+
+  if (status === "Loading"){
+    return " ";
+  }
+
     return (
-        <form>
+        <form onSubmit={handlePostSubmit} >
           <div className="flex">
             <div>
               
@@ -14,7 +29,9 @@ export default function Postform(){
             </div>
             <div className="justify-center items-center flex-1">
               <textarea className="w-100 h-10 
-               ml-4 mb-3 mt-6 rounded-lg mt-2 rounded-lg text-xl" placeholder="Share your thoughts?"></textarea>
+               ml-4 mb-3 mt-6 rounded-lg mt-2 rounded-lg text-xl" placeholder="Share your thoughts?"
+               value={text} onChange={(e)=> setText(e.target.value)}
+               ></textarea>
             </div>
           </div>
           <div className="ml-8 border-t border-gray-500 w-110">
