@@ -31,9 +31,10 @@ async function handleSubmit(e){
         },
         credentials:"include",
         body:JSON.stringify({
-            username}),
+            username,id: userInfo.id,}),
     });
     window.location.reload();
+    
 
 }
 
