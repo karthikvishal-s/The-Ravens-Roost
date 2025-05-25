@@ -7,6 +7,7 @@ import { useState } from "react";
 import { useSession } from "next-auth/react";
 import { useEffect } from "react";
 import PostContent  from "@/components/PostContent";
+import Layout from "@/components/layout";
 
 
 export default function Home() {
@@ -38,10 +39,10 @@ if (!userInfo?.user?.username){
 }
 
   return (
-    <div className=" bg-black text-white max-w-lg mx-auto border-l border-r ">
-      <h1 className="text-2xl font-bold p-4">Home</h1>
+    <Layout>
+      <h1 className="text-2xl font-bold p-4 text-3xl text-yellow-500" style={{color:'d4af37'}}>ThroneFeed</h1>
       <Postform  onPost={()=>{fetchHomePosts();}}/>
-      <div className="text-white">
+      <div className="text-black">
         
         {posts.length>0 && posts.map(post => (
           <div key=
@@ -51,6 +52,7 @@ if (!userInfo?.user?.username){
         ))}
             
       </div>
-    </div>
+      </Layout>
+    
   )
 }
