@@ -2,9 +2,10 @@
 import useUserInfo from "@/hooks/useUserInfo";
 import { useState } from "react";
 import axios from "axios";
+import Avatar from "./avatar";
 
 
-export default function Postform(){
+export default function Postform({onPost}){
     const { userInfo, status} = useUserInfo();
     const [text,setText] = useState("");
 
@@ -13,20 +14,21 @@ export default function Postform(){
     await axios.post('api/posts', {
       text,
     })
-  console.log("Post submitted:", text);
+    setText("");
+    if(onPost){
+      onPost();
+    }
+  
   }
 
   if (status === "Loading"){
     return " ";
   }
-
+console.log("User Info:", userInfo);
     return (
         <form onSubmit={handlePostSubmit} >
           <div className="flex">
-            <div>
-              
-              <img src={userInfo?.user.image}  alt="profilepic" className=" rounded-full mt-2 ml-2 h-15 w-15 overflow-hiiden"  />
-            </div>
+            <Avatar src={userInfo?.user?.image} />
             <div className="justify-center items-center flex-1">
               <textarea className="w-100 h-10 
                ml-4 mb-3 mt-6 rounded-lg mt-2 rounded-lg text-xl" placeholder="Share your thoughts?"
@@ -35,7 +37,7 @@ export default function Postform(){
             </div>
           </div>
           <div className="ml-8 border-t border-gray-500 w-110">
-            <button className="bg-blue-500  text-white p-2 rounded-full font-bold w-20 mt-4 ml-90">
+            <button className="bg-blue-500  text-white p-2 rounded-full font-bold w-20 mt-4 ml-90 mb-5">
               Zing
             </button>
           </div>

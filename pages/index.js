@@ -6,6 +6,7 @@ import { set } from "mongoose";
 import { useState } from "react";
 import { useSession } from "next-auth/react";
 import { useEffect } from "react";
+import PostContent  from "@/components/PostContent";
 
 
 export default function Home() {
@@ -39,13 +40,13 @@ if (!userInfo?.user?.username){
   return (
     <div className=" bg-black text-white max-w-lg mx-auto border-l border-r ">
       <h1 className="text-2xl font-bold p-4">Home</h1>
-      <Postform />
+      <Postform  onPost={()=>{fetchHomePosts();}}/>
       <div className="text-white">
         
         {posts.length>0 && posts.map(post => (
           <div key=
-          {post._id} className=" border border-gray-500 p-5 font-bold">
-            {post.text}
+          {post._id} className=" border-t border-gray-500 p-5 font-bold w-110 ml-8">
+            <PostContent {...post} />
           </div>
         ))}
             
