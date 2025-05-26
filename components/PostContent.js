@@ -4,7 +4,7 @@ import Link from "next/link";
 import TimeAgo from "javascript-time-ago";
 import PostButtons from "./postbuttons";
 
-export default function PostContent({text,author,createdAt,_id,big=false}) {
+export default function PostContent({text,author,createdAt,likesCount,_id,big=false}) {
   const date = new Date(createdAt);
 
 // Format: "May 25, 2025"
@@ -59,11 +59,11 @@ const formattedDate = date.toLocaleDateString("en-US", {
 
         {big?(
           <div>
-          <PostButtons></PostButtons>
+          <PostButtons id={_id}  likesCount={likesCount}></PostButtons>
         </div>
         ):(
           <div>
-          <PostButtons></PostButtons>
+          <PostButtons id={_id} likesCount={likesCount}></PostButtons>
         </div>
         )}
         

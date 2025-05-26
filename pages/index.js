@@ -16,16 +16,15 @@ export default function Home() {
 const {userInfo,status:UserInfoStatus} = useUserInfo()
 const [posts,setPosts] = useState([]);
 
-async function fetchHomePosts(){
-
-  const response = await axios.get("/api/posts");
-console.log("API response:", response.data);
-setPosts(response.data);
-
-axios
-    .get('/api/posts')
-    .then(response =>{setPosts(response.data)})
+async function fetchHomePosts() {
+  try {
+    const response = await axios.get("/api/posts");
+    setPosts(response.data.posts || []);  // Safely handle missing posts
+  } catch (err) {
+    console.error("Error fetching posts:", err);
+  }
 }
+
 
 useEffect(() => {
   fetchHomePosts();
@@ -40,7 +39,7 @@ if (!userInfo?.user?.username){
 
   return (
     <Layout>
-      <h1 className="text-2xl font-bold p-4 text-3xl text-yellow-500" style={{color:'d4af37'}}>ThroneFeed</h1>
+      <h1 className="text-2xl font-bold p-4 text-3xl text-yellow-500">ThroneFeed</h1>
       <Postform  onPost={()=>{fetchHomePosts();}}/>
       <div className="text-black">
         
