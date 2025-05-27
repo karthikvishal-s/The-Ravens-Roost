@@ -1,6 +1,6 @@
 import { initMongoose } from "@/lib/mongoose";
 import Post from "@/models/Post";
-
+import User from "@/models/User"; 
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/pages/api/auth/[...nextauth]";
 import Like from "@/models/Like";
@@ -8,6 +8,10 @@ import Like from "@/models/Like";
 export default  async function handler(req,res){
     await initMongoose();
     const session = await getServerSession(req, res, authOptions);
+
+    if (!session) {
+        return res.status(401).json({ error: "Not authenticated" });
+      }
     
     if (req.method === "GET"){
         const {id}  = req.query;
@@ -34,7 +38,8 @@ export default  async function handler(req,res){
             idsLikedByMe,
         });
 
-    }}
+    }
+}
 
     if(req.method === 'POST'){
         const {text} = req.body
@@ -46,4 +51,3 @@ export default  async function handler(req,res){
     }
     
 }
-

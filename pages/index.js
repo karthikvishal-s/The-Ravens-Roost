@@ -4,7 +4,7 @@ import useUserInfo from "@/hooks/useUserInfo";
 import axios from "axios";
 import { set } from "mongoose";
 import { useState } from "react";
-import { useSession } from "next-auth/react";
+import { signOut, useSession } from "next-auth/react";
 import { useEffect } from "react";
 import PostContent  from "@/components/PostContent";
 import Layout from "@/components/layout";
@@ -13,16 +13,23 @@ import Layout from "@/components/layout";
 export default function Home() {
   
 
-const {userInfo,status:UserInfoStatus} = useUserInfo()
+const {userInfo,UserInfoStatus,setUserInfo} = useUserInfo()
 const [posts,setPosts] = useState([]);
+const [idsLikedByMe,setIdsLikedByMe] = useState([]);
 
 async function fetchHomePosts() {
   try {
     const response = await axios.get("/api/posts");
     setPosts(response.data.posts || []);  // Safely handle missing posts
+    setIdsLikedByMe(response.data.idsLikedByMe); // Safely handle missing idsLikedByMe
   } catch (err) {
     console.error("Error fetching posts:", err);
   }
+}
+
+async function logout(){
+   setUserInfo(null); 
+  await signOut();
 }
 
 
@@ -31,7 +38,7 @@ useEffect(() => {
 }, []);
 
 
-if (UserInfoStatus==="loading") return "Loading... user info ";
+if (UserInfoStatus==="loading") return <div className="text-white">"Loading... user info "</div>;
 
 if (!userInfo?.user?.username){
   return <UsernameForm />;
@@ -46,10 +53,12 @@ if (!userInfo?.user?.username){
         {posts.length>0 && posts.map(post => (
           <div key=
           {post._id} className=" border-t border-gray-500 p-5 font-bold w-110 ml-8">
-            <PostContent {...post} />
+            <PostContent {...post}  likedByMe={idsLikedByMe.includes(post._id)}/>
           </div>
-        ))}
-            
+        ))}     
+      </div>
+      <div className="flex items-center justify-center mt-10">
+        <button className="bg-red-500 px-5 py-2 rounded-full text-white text-xl" onClick={logout}>Logout</button>
       </div>
       </Layout>
     

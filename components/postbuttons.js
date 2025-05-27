@@ -27,7 +27,8 @@ export default function PostButtons({id,
 
     return (
         <div className="flex justify-between items-center p-2 border-t border-gray-600 pt-6">
-            <button className={(likedByMe?'text-red-500 ml-3 flex':'text-gray-400 ml-3 flex text-xl')} onClick={togglelike}>
+         
+            <button className={(likedByMe?'text-red-500 ml-3 flex':'text-gray-400 ml-3 flex text-xl ')} onClick={togglelike}>
                 <img src={'/swords.png'} className="w-7 transition-transform transform hover:scale-130 "></img>
                 <span className="ml-3">{likesCount}</span>
             </button>

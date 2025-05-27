@@ -27,6 +27,12 @@ export const authOptions = {
       }
       return session;
     },
+    async jwt({ token, user }) {
+      if (user?._id) {
+        token.id = user._id;
+      }
+      return token;
+    }
   },
 };
 
