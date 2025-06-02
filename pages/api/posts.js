@@ -9,9 +9,7 @@ export default  async function handler(req,res){
     await initMongoose();
     const session = await getServerSession(req, res, authOptions);
 
-    if (!session) {
-        return res.status(401).json({ error: "Not authenticated" });
-      }
+  
     
     if (req.method === "GET"){
         const {id}  = req.query;

@@ -24,7 +24,7 @@ export default function useUserInfo() {
           setUserInfo(data);
           setStatus("loaded");
         } catch (err) {
-          console.error("Error fetching user info:", err);
+          
           setUserInfo(null); // Clear userInfo on error
           setStatus("error");
         }

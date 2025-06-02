@@ -8,6 +8,8 @@ import { signOut, useSession } from "next-auth/react";
 import { useEffect } from "react";
 import PostContent  from "@/components/PostContent";
 import Layout from "@/components/layout";
+import Router from "next/router";
+import { useRouter } from "next/router";
 
 
 export default function Home() {
@@ -23,9 +25,10 @@ async function fetchHomePosts() {
     setPosts(response.data.posts || []);  // Safely handle missing posts
     setIdsLikedByMe(response.data.idsLikedByMe); // Safely handle missing idsLikedByMe
   } catch (err) {
-    console.error("Error fetching posts:", err);
+    //console.error("Error fetching posts:", err);
   }
 }
+const router = useRouter();
 
 async function logout(){
    setUserInfo(null); 
@@ -44,6 +47,13 @@ if (!userInfo?.user?.username){
   return <UsernameForm />;
 }
 
+async function toUsernamePage(){
+  console.log("Raised request username page")
+  router.push('/username')
+  
+}
+
+
   return (
     <Layout>
       <h1 className="text-2xl font-bold p-4 text-3xl text-yellow-500">ThroneFeed</h1>
@@ -59,6 +69,9 @@ if (!userInfo?.user?.username){
       </div>
       <div className="flex items-center justify-center mt-10">
         <button className="bg-red-500 px-5 py-2 rounded-full text-white text-xl" onClick={logout}>Logout</button>
+      </div>
+      <div className="flex items-center justify-center mt-10">
+        <button className="bg-blue-500 px-5 py-2 rounded-full text-white text-xl" onClick={toUsernamePage}>Username page</button>
       </div>
       </Layout>
     
