@@ -55,8 +55,15 @@ async function toUsernamePage(){
 
 
   return (
+    <>
+    <div className="flex items-center justify-center mt-10">
+        <button className="bg-red-500 px-5 py-2 rounded-full text-white text-xl" onClick={logout}>Logout</button>
+      </div>
+      <div className="flex items-center justify-center mt-10">
+        <button className="bg-blue-500 px-5 py-2 rounded-full text-white text-xl" onClick={toUsernamePage}>Username page</button>
+      </div>
     <Layout>
-      <h1 className="text-2xl font-bold p-4 text-3xl text-yellow-500">ThroneFeed</h1>
+      <h1 className="text-2xl font-bold p-4 text-3xl text-yellow-500">Feed</h1>
       <Postform  onPost={()=>{fetchHomePosts();}}/>
       <div className="text-black">
         
@@ -74,6 +81,9 @@ async function toUsernamePage(){
         <button className="bg-blue-500 px-5 py-2 rounded-full text-white text-xl" onClick={toUsernamePage}>Username page</button>
       </div>
       </Layout>
+      
+    </>
+      
     
   )
 }

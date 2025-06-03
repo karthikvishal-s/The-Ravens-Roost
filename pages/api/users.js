@@ -9,6 +9,7 @@ export default async function handle(req, res) {
   await initMongoose();
   const session = await getServerSession(req, res, authOptions);
 
+
   if (!session || !session.user) {
     return res.status(401).json({ message: "Unauthorized" });
   }
@@ -21,8 +22,10 @@ export default async function handle(req, res) {
   }
 
   if (req.method === "PUT") {
-    const { username } = req.body;
+    const { username,sigil } = req.body;
     user.username = username;
+    user.sigil = sigil || "Baratheon"; // Default sigil if not provided
+
     await user.save();
     return res.status(200).json({ message: "Username updated" });
   }
@@ -34,4 +37,6 @@ export default async function handle(req, res) {
   }
 
   return res.status(405).json({ message: "Method not allowed" });
+
+  
 }

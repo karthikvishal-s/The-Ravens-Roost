@@ -4,6 +4,7 @@ const UserSchema = new Schema({
     email: String,
     image: String,
     username:String,
+    sigil:String
 });
 const User =models?.User||model('User', UserSchema);
 

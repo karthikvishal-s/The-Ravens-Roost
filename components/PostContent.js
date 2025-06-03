@@ -29,7 +29,11 @@ const formattedDate = date.toLocaleDateString("en-US", {
         <div className="flex-1">
           {/* Author name and username */}
           <div>
-            <div className="font-bold text-xl text-red-700">{author?.name || "Unknown"}</div>
+            <div className="flex">
+            <div className="font-bold text-xl text-yellow-500">{author?.name || "Unknown"}</div>
+            <div className="font-bold text-xl text-white ml-10">{author?.sigil || "Unknown"}</div>
+
+            </div>
             <div className="text-gray-500 text-l">@{author?.username || "anonymous"} 
                 {!big?(<span className="text-gray-500 ml-4"> 
                 {createdAt &&(<ReactTimeAgo date={createdAt} timeStyle={'twitter'} />)}</span>):("")}
