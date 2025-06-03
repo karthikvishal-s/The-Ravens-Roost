@@ -54,6 +54,7 @@ export default async function handler(req, res) {
   }
 
   if (req.method === "POST") {
+    console.log("POST /api/posts called");
     const { text } = req.body;
 
     if (!text?.trim()) {

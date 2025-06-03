@@ -7,12 +7,16 @@ import axios from 'axios';
 import PostContent from '@/components/PostContent';
 import Layout from '@/components/layout';
 import Link from "next/link";
+import useUserInfo from '@/hooks/useUserInfo';
+import Postform from '@/components/postform';
+
 
 
 export default function PostPage(){
     const router = useRouter();
     const {id} = router.query
     const [post, setPost] = useState();
+    const  {userInfo}  = useUserInfo();
 
     useEffect(() => {
 if(!id) return;
@@ -35,8 +39,20 @@ if(!id) return;
             </Link>
 
             {post && (
+                <>
                 <PostContent {...post} big={true} />
+                <div>
+
+                </div>
+                </>
+                
             )}
+            {!!userInfo &&(
+                <div className='px-7  border border-gray-600 mt-3'>
+                   <Postform onPost={()=>{}} compact/>
+                </div>
+            )}
+            
         </Layout>
     );
 }
