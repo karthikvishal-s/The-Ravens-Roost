@@ -15,23 +15,29 @@ async function updateLikesCount(postId) {
 
 
 
-export default async function handle(req,res){
+export default async function handle(req, res) {
     await initMongoose();
-    const session = await getServerSession(req,res,authOptions);
+    const session = await getServerSession(req, res, authOptions);
     const postId = req.body.id;
     const userID = session?.user?._id;
-
-    const existingLike=await Like.findOne({author:userID,post:postId})
-    
-    if (existingLike){
-        await existingLike.deleteOne();
-        await updateLikesCount(postId);
-
-        res.json({ like: null });
-
+  
+    console.log("Session:", session); // 🔍 Debug
+    console.log("User ID:", userID); // 🔍 Debug
+  
+    if (!userID) {
+      return res.status(401).json({ error: "Unauthorized" });
     }
-    else{
-        const like = await Like.create({author:userID, post:postId});
-        await updateLikesCount(postId);
-        res.json({like})
-    }}
+  
+    const existingLike = await Like.findOne({ author: userID, post: postId });
+  
+    if (existingLike) {
+      await existingLike.deleteOne();
+      await updateLikesCount(postId);
+      res.json({ liked: false });
+    } else {
+      await Like.create({ author: userID, post: postId });
+      await updateLikesCount(postId);
+      res.json({ liked: true });
+    }
+  }
+  

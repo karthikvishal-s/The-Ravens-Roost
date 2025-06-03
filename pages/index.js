@@ -33,6 +33,7 @@ const router = useRouter();
 async function logout(){
    setUserInfo(null); 
   await signOut();
+
 }
 
 
@@ -70,7 +71,7 @@ async function toUsernamePage(){
         {posts.length>0 && posts.map(post => (
           <div key=
           {post._id} className=" border-t border-gray-500 p-5 font-bold w-110 ml-8">
-            <PostContent {...post}  likedByMe={idsLikedByMe.includes(post._id)}/>
+            <PostContent {...post}  likedByMe={idsLikedByMe.includes(post._id)} refreshPosts={fetchHomePosts}/>
           </div>
         ))}     
       </div>

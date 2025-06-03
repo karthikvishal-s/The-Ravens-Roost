@@ -6,7 +6,8 @@ import React from 'react';
 
 export default function PostButtons({id,
     likesCount:likesCountDefault=0,
-    likedByMe:likedByMeDefault = false})
+    likedByMe:likedByMeDefault = false,
+    refreshPosts})
     
     {
     const [likesCount, setLikesCount] = useState(likesCountDefault);
@@ -14,7 +15,8 @@ export default function PostButtons({id,
     const [likedByMe, setLikedByMe] = useState(likedByMeDefault);
     async function togglelike(){
         const response= await axios.post('/api/like', {id});
-        if(response.data.like && response.data){
+        
+        if(response.data.liked ){
             setLikesCount(prev=> prev + 1);
             setLikedByMe(true);
 
@@ -23,6 +25,7 @@ export default function PostButtons({id,
             setLikesCount(prev=> prev - 1);
             setLikedByMe(false);
         }
+        if (refreshPosts) refreshPosts();
     }
 
     return (

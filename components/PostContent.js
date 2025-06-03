@@ -43,7 +43,7 @@ const formattedDate = date.toLocaleDateString("en-US", {
           {/* Post text */}
           <div>
             {!big?(
-            <Link style={{color:"#fffff0"}} className=" mt-2 text-l" href={`/${author.username}/status/${_id}`}>
+            <Link style={{color:"#fffff0"}} className=" mt-2 text-l" href={`/${author?.username || "Unknown"}/status/${_id}`}>
               {text}
             </Link>):("")}
           </div>
