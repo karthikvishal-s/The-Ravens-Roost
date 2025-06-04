@@ -22,9 +22,10 @@ export default async function handle(req, res) {
   }
 
   if (req.method === "PUT") {
-    const { username,sigil } = req.body;
-    user.username = username;
+    const { username,sigil,name2 } = req.body;
+    user.username =username; // Use name if provided, otherwise use username
     user.sigil = sigil || "Baratheon"; // Default sigil if not provided
+    user.name2 = name2
 
     await user.save();
     return res.status(200).json({ message: "Username updated" });

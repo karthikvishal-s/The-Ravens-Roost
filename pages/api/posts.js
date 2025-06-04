@@ -21,7 +21,7 @@ export default async function handler(req, res) {
     // Fetch single post
     if (id) {
       try {
-        const post = await Post.findById(id).populate("author", "name username image sigil");
+        const post = await Post.findById(id).populate("author", "name2 username image sigil name");
         if (!post) return res.status(404).json({ error: "Post not found" });
         return res.status(200).json({ post });
       } catch (err) {
@@ -32,7 +32,7 @@ export default async function handler(req, res) {
     // Fetch all posts
     try {
       const posts = await Post.find()
-        .populate("author", "name username image sigil")
+        .populate("author", "name2 username image sigil name")
         .sort({ createdAt: -1 })
         .limit(20)
         .exec();

@@ -15,11 +15,12 @@ const formattedDate = date.toLocaleDateString("en-US", {
   hour: "2-digit",
   minute: "2-digit",
 });  
-  
+  console.log("Autor",author)
   return(
       <>
         <div className="flex items-start gap-4 p-4">
         {/* Avatar */}
+        
         
         <div>
           <Avatar src={author?.image} />
@@ -30,9 +31,9 @@ const formattedDate = date.toLocaleDateString("en-US", {
           {/* Author name and username */}
           <div>
             <div className="flex">
-            <div className="font-bold text-xl text-yellow-500">{author?.name || "Unknown"}</div>
+            <div className="font-bold text-xl text-yellow-500">{author?.username || "Unknown"}</div>
             <div className="font-bold text-xl text-white ml-10">{author?.sigil || "Unknown"}</div>
-
+            <div className="font-bold text-xl text-white ml-10">{author?.name2 || "Unknown"}</div>
             </div>
             <div className="text-gray-500 text-l">@{author?.username || "anonymous"} 
                 {!big?(<span className="text-gray-500 ml-4"> 

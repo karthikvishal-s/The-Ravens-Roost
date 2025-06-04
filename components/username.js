@@ -6,6 +6,7 @@ export default function UsernameForm() {
     const { userInfo, status } = useUserInfo("");
     const [username, setUsername] = useState("");
     const [sigil,setSigil] = useState("");
+    const [name2, setName] = useState("");
     const router = useRouter();
 
     useEffect(() => {
@@ -14,7 +15,8 @@ export default function UsernameForm() {
         const defaultUsername = userInfo.user.username;
         if (defaultUsername) {
             setUsername(defaultUsername);
-            if (!sigil) setSigil("Baratheon"); // only if not set
+            if (!sigil) setSigil("Baratheon");
+            if (!name2) setName("Andal");  // only if not set
         }
     }, [status, userInfo]);
     
@@ -37,8 +39,9 @@ export default function UsernameForm() {
             credentials: "include",
             body: JSON.stringify({
                 username,
-                id: userInfo.id,
+                
                 sigil,
+                name2,
             }),
         });
 
@@ -72,8 +75,16 @@ export default function UsernameForm() {
         value={username}
         onChange={(e) => setUsername(e.target.value)}
     />
-   
-
+   <p className="text-gray-400 mt-5 text-xl font-bold">How can we call you ?</p>
+        <input
+        className="block text-yellow-400  w-90 rounded text-xl bg-gray-900  focus:ring-blue-100   px-7 py-2 mt-6"
+        type="text"
+        required
+        placeholder="Name"
+        value={name2}
+        onChange={(e) => setName(e.target.value)} >
+        
+        </input>
 
 
     <h1 className="text-xl text-gray-400 font-bold mt-10 ">Choose your house</h1>
