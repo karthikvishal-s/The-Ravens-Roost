@@ -59,21 +59,26 @@ export default function UsernameForm() {
     }
 
     return (
-        <div className="flex h-screen items-center justify-center bg-black">
-            <form className="text-center" onSubmit={handleSubmit}>
-    <h1 className="text-2xl text-white font-bold">Pick a username</h1>
+        <div style={{backgroundColor:"#000000"}} className="flex border-2  mx-auto h-200 justify-center bg-black border-white p-30 w-120 mt-50 rounded  ">
+            <form className="" onSubmit={handleSubmit}>
+    <h1 className="text-xl text-gray-400 font-bold"><span className="text-3xl text-yellow-500">Help us keep your account safe.</span><br></br> <br>
+    </br>Verify your identity by entering your username</h1>
 
     <input
-        className="block bg-yellow-400 mt-3 p-2 rounded-full text-2xl"
+        className="block text-yellow-400 mt-3 w-90 rounded text-xl bg-gray-900  focus:ring-blue-100   px-7 py-2 mt-6"
         type="text"
         required
         placeholder="username"
         value={username}
         onChange={(e) => setUsername(e.target.value)}
     />
-    <h1 className="text-2xl text-white font-bold mt-10">Pick a Sigil</h1>
+   
+
+
+
+    <h1 className="text-xl text-gray-400 font-bold mt-10 ">Choose your house</h1>
     <select
-        className="block bg-yellow-500 mt-3 p-3 mb-10 ml-14 rounded-full text-center text-2xl"
+        className="block bg-yellow-500 mt-7  mb-5 ml-14 rounded-full text-center text-2xl"
         required
         value={sigil}
         onChange={(e) => setSigil(e.target.value)}
@@ -89,7 +94,14 @@ export default function UsernameForm() {
         <option className="text-center" value="Tully">Tully 🐟</option>
     </select>
 
-    <button className="w-full bg-blue-500 mt-2 text-white p-2 rounded-full font-bold">
+
+
+
+    <a href="/" className="text-blue-500 text-lg mt-2 block mt-20">Why am i being asked for this information?</a> 
+
+
+
+    <button className="flex justify-center ml-23 w-40 bg-yellow-500 mt-10 text-black p-2 rounded-full font-bold">
         Continue
     </button>
 </form>
