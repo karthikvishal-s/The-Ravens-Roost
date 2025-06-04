@@ -13,15 +13,17 @@ export default function UsernameForm() {
         if (status !== "loaded" || !userInfo?.user?.email) return;
     
         const defaultUsername = userInfo.user.username;
+        const defaultSigil = userInfo.user.sigil 
         if (defaultUsername) {
             setUsername(defaultUsername);
-            if (!sigil) setSigil("Baratheon");
-            if (!name2) setName("Andal");  // only if not set
+              // only if not set
+            setSigil(defaultSigil || "Stark"); // Default sigil if not set
+            setName(userInfo.user.name2 || ""); // Default name if not set
         }
     }, [status, userInfo]);
-    
-    
-    
+
+
+
 
     async function handleSubmit(e) {
         e.preventDefault();
@@ -103,6 +105,9 @@ export default function UsernameForm() {
         <option className="text-center" value="Martell">Martell 🗡️</option>
         <option className="text-center" value="Greyjoy">Greyjoy 🦑</option>
         <option className="text-center" value="Tully">Tully 🐟</option>
+        <option className="text-center" value="Arryn">Arryn 🐦</option>
+        <option className="text-center" value="Tarth">Tarth 🏰</option>
+        <option className="text-center" value="Snow">Snow ❄️</option>
     </select>
 
 

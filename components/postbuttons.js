@@ -31,25 +31,25 @@ export default function PostButtons({id,
 
     return (
         <div className="flex justify-between items-center p-2 border-t border-gray-600 pt-6 text-white">
-         {commentsCount?1:0}
-            <button className={(likedByMe?'text-red-500 ml-3 flex':'text-gray-400 ml-3 flex text-xl ')} onClick={togglelike}>
-                <img src={'/swords.png'} className="w-7 transition-transform transform hover:scale-130 "></img>
-                <span className="ml-3">{likesCount}</span>
+
+            <button className={(likedByMe?'text-white ml-3 flex text-xl':'text-gray-600 ml-3 flex text-xl ')} onClick={togglelike}>
+                <img src={'/swords.png'} className={(likedByMe?'w-8 transition-transform transform hover:scale-130 ':'w-7 transition-transform transform hover:scale-130 opacity-50')}></img>
+                <span className='ml-2 mt-1 '>{likesCount}</span>
             </button>
 
-            <button className="text-xl text-gray-400 flex">
+            <button className="text-xl text-gray-600 flex">
                 <img src={'/circular-arrows.png'} className="w-7"></img>
                 <span className="ml-3">0</span>
             </button>
 
-            <button className="text-xl text-gray-400 flex">
+            <button className="text-xl text-gray-600 flex">
                 <img src={'/crow.png'} className="w-7"></img>
                 <span className="ml-3">0</span>
             </button>
 
-            <button className="text-xl text-gray-400 flex mr-3">
+            <button className="text-xl text-gray-600 flex mr-3">
                 <   img src={'/manuscript.png'} className="w-7"></img>
-                <span className="ml-3">0/{commentsCount}</span>
+                <span className="ml-3">{commentsCount}</span>
             </button>
 
         </div>

@@ -1,5 +1,5 @@
 import Postform from "@/components/postform";
-import UsernameForm from "@/components/username";
+import UsernameForm from "@/components/usernamePage";
 import useUserInfo from "@/hooks/useUserInfo";
 import axios from "axios";
 import { set } from "mongoose";
@@ -22,6 +22,7 @@ const [idsLikedByMe,setIdsLikedByMe] = useState([]);
 async function fetchHomePosts() {
   try {
     const response = await axios.get("/api/posts");
+    console.log("Fetched posts:", response.data.posts); // Debugging line
     setPosts(response.data.posts || []);  // Safely handle missing posts
     setIdsLikedByMe(response.data.idsLikedByMe); // Safely handle missing idsLikedByMe
   } catch (err) {
@@ -50,7 +51,7 @@ if (!userInfo?.user?.username){
 
 async function toUsernamePage(){
   console.log("Raised request username page")
-  router.push('/username')
+  router.push('/usernamePage')
   
 }
 

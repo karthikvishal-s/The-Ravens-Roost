@@ -12,7 +12,7 @@ export default function useUserInfo() {
   useEffect(() => {
     const fetchUserInfo = async () => {
       setStatus("loading");
-      console.log("session data",session)
+  
       if (sessionStatus === "authenticated" && session?.user?._id) {
         try {
           const res = await fetch(`/api/users?id=${session.user._id}`);

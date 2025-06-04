@@ -32,10 +32,24 @@ export default async function handle(req, res) {
   }
 
   if (req.method === "GET") {
-    const id = req.query.id;
-    const foundUser = await User.findById(id);
-    return res.status(200).json({ user: foundUser });
+    const { id, username } = req.query;
+  
+    let user;
+    if (id) {
+      user = await User.findById(id);
+    } else if (username) {
+      user = await User.findOne({ username });
+    } else {
+      return res.status(400).json({ message: "Missing ID or username" });
+    }
+  
+    if (!user) {
+      return res.status(404).json({ message: "User not found" });
+    }
+  
+    return res.status(200).json({ user });
   }
+  
 
   return res.status(405).json({ message: "Method not allowed" });
 

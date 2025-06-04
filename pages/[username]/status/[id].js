@@ -9,6 +9,8 @@ import Layout from '@/components/layout';
 import Link from "next/link";
 import useUserInfo from '@/hooks/useUserInfo';
 import Postform from '@/components/postform';
+import BackArrow from '@/components/backArrow';
+
 
 
 
@@ -20,9 +22,7 @@ export default function PostPage() {
     const [replies, setReplies] = useState([]);
     const [repliesLikedByMe, setRepliesLikedByMe] = useState([]);
 
-    useEffect(() => {
-        if (!id) return;
-
+    function  fetchData(){
         axios.get('/api/posts?id=' + id)
             .then(response => {
                 setPost(response.data.post);
@@ -33,17 +33,21 @@ export default function PostPage() {
                 setReplies(response.data.posts);
                 setRepliesLikedByMe(response.data.idsLikedByMe || []);
             })
+
+    }
+
+    useEffect(() => {
+        if (!id) return;
+
+        fetchData()
     }, [id]);
 
     return (
         <Layout>
-            <Link href={'/'} className='flex'>
-                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-7 ml-5 text-white">
-                    <path strokeLinecap="round" strokeLinejoin="round" d="M10.5 19.5 3 12m0 0 7.5-7.5M3 12h18" />
-                </svg>
-
-                <h1 className='text-2xl text-bold ml-4 mb-5 text-white'>Realm</h1>
-            </Link>
+            <div className='flex '>
+            <BackArrow destination='/'></BackArrow>
+            <h1 className='text-2xl text-bold ml-4 mb-5 text-white'>Realm</h1>
+            </div>
 
             {post && (
                 <>
@@ -56,7 +60,7 @@ export default function PostPage() {
             )}
             {!!userInfo && (
                 <div className='px-7  border border-gray-600 mt-3'>
-                    <Postform onPost={() => { }} compact parent={id} />
+                    <Postform onPost={fetchData} compact parent={id} />
                 </div>
 
             )}

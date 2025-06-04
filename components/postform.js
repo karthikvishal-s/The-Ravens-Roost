@@ -40,7 +40,7 @@ console.log("User Info:", userInfo);
                value={text} required onChange={(e)=> setText(e.target.value)}
                ></textarea>
             </div>
-            <button style={{ backgroundColor: '#FFD700' }} className=" text-black p-2 rounded-full font-bold w-20 mt-4 ml-0 mb-5">
+            <button className=" bg-yellow-400 text-black p-2 rounded-full font-bold w-20 mt-4 ml-0 mb-5 hover:bg-yellow-300 ml-5">
               {compact?btn:"Send a Raven"}
              
 
@@ -60,7 +60,7 @@ console.log("User Info:", userInfo);
             </div>
           </div>
           <div className="ml-8 border-t border-gray-500 w-110">
-            <button style={{ backgroundColor: '#FFD700' }} className=" text-black p-2 rounded-full font-bold w-40 mt-4 ml-80 mb-5">
+            <button  className="bg-yellow-400 text-black p-2 rounded-full font-bold w-40 mt-4 ml-80 mb-5 hover:bg-yellow-300 cursor-pointer">
               {compact?btn:"Send a Raven"}
               <img src="/raven.png" alt="Raven" className="inline-block w-5 h-5 ml-2" />
 
