@@ -31,7 +31,8 @@ export default async function handler(req, res) {
 
     // Fetch all posts
     try {
-      const posts = await Post.find()
+      const parent = req.query.parent || null;
+      const posts = await Post.find({parent})
         .populate("author", "name2 username image sigil name")
         .sort({ createdAt: -1 })
         .limit(20)
@@ -55,7 +56,7 @@ export default async function handler(req, res) {
 
   if (req.method === "POST") {
     console.log("POST /api/posts called");
-    const { text } = req.body;
+    const { text, parent} = req.body;
 
     if (!text?.trim()) {
       return res.status(400).json({ error: "Post text is required" });
@@ -65,7 +66,23 @@ export default async function handler(req, res) {
       const post = await Post.create({
         author: userId,
         text,
+        parent,
+
       });
+      
+
+
+      if (parent) {
+        const parentPost = await Post.findById(parent);
+        if (parentPost) {
+          parentPost.commentsCount = await Post.countDocuments({ parent });
+          await parentPost.save();
+        }
+      }
+      
+
+
+
 
       return res.status(201).json(post);
     } catch (err) {

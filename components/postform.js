@@ -5,7 +5,7 @@ import axios from "axios";
 import Avatar from "./avatar";
 
 
-export default function Postform({onPost,compact,placeholder}){
+export default function Postform({onPost,compact,placeholder,parent}){
     const { userInfo, status} = useUserInfo();
     const [text,setText] = useState("");
 
@@ -15,7 +15,7 @@ export default function Postform({onPost,compact,placeholder}){
   async function handlePostSubmit(e){
     e.preventDefault();
     await axios.post('/api/posts', {
-      text,
+      text,parent
     })
     setText("");
     if(onPost){

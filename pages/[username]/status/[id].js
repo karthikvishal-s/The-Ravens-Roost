@@ -12,47 +12,66 @@ import Postform from '@/components/postform';
 
 
 
-export default function PostPage(){
+export default function PostPage() {
     const router = useRouter();
-    const {id} = router.query
+    const { id } = router.query
     const [post, setPost] = useState();
-    const  {userInfo}  = useUserInfo();
+    const { userInfo } = useUserInfo();
+    const [replies, setReplies] = useState([]);
+    const [repliesLikedByMe, setRepliesLikedByMe] = useState([]);
 
     useEffect(() => {
-if(!id) return;
+        if (!id) return;
 
         axios.get('/api/posts?id=' + id)
-        .then(response => {
-            setPost(response.data.post);
-        })
-    },[id]);
-
+            .then(response => {
+                setPost(response.data.post);
+            });
+        axios.get('/api/posts?parent=' + id)
+            .then(response => {
+                console.log("res.data",response.data)
+                setReplies(response.data.posts);
+                setRepliesLikedByMe(response.data.idsLikedByMe || []);
+            })
+    }, [id]);
 
     return (
         <Layout>
             <Link href={'/'} className='flex'>
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-7 ml-5 text-white">
-  <path strokeLinecap="round" strokeLinejoin="round" d="M10.5 19.5 3 12m0 0 7.5-7.5M3 12h18" />
-</svg>
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-7 ml-5 text-white">
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M10.5 19.5 3 12m0 0 7.5-7.5M3 12h18" />
+                </svg>
 
-               <h1 className='text-2xl text-bold ml-4 mb-5 text-white'>Realm</h1>
+                <h1 className='text-2xl text-bold ml-4 mb-5 text-white'>Realm</h1>
             </Link>
 
             {post && (
                 <>
-                <PostContent {...post} big={true} />
-                <div>
+                    <PostContent {...post} big={true} />
+                    <div>
 
-                </div>
+                    </div>
                 </>
-                
+
             )}
-            {!!userInfo &&(
+            {!!userInfo && (
                 <div className='px-7  border border-gray-600 mt-3'>
-                   <Postform onPost={()=>{}} compact/>
+                    <Postform onPost={() => { }} compact parent={id} />
                 </div>
+
             )}
-            
+            <div className='text-white text-xl font-bold  mt-3 border-b border-gray-600 pb-3'>
+                <p className='ml-5'>Replies</p>
+            </div>
+            <div className='text-white'>
+                {replies.length>0 && replies.map(reply => (
+                    <div className='border-b border-gray-600 p-5 font-bold ' key={reply._id}>
+                        <PostContent {...reply} likedByMe={repliesLikedByMe.includes(reply._id)} />
+                    </div>
+                ))}
+            </div>
+
         </Layout>
+
     );
 }

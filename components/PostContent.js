@@ -4,7 +4,7 @@ import Link from "next/link";
 import TimeAgo from "javascript-time-ago";
 import PostButtons from "./postbuttons";
 
-export default function PostContent({text,author,createdAt,likesCount,likedByMe,_id,big=false}) {
+export default function PostContent({text,author,createdAt,likesCount,likedByMe,_id,big=false,commentsCount}) {
   const date = new Date(createdAt);
 
 // Format: "May 25, 2025"
@@ -31,9 +31,9 @@ const formattedDate = date.toLocaleDateString("en-US", {
           {/* Author name and username */}
           <div>
             <div className="flex">
-            <div className="font-bold text-xl text-yellow-500">{author?.username || "Unknown"}</div>
-            <div className="font-bold text-xl text-white ml-10">{author?.sigil || "Unknown"}</div>
-            <div className="font-bold text-xl text-white ml-10">{author?.name2 || "Unknown"}</div>
+            <div className="font-bold text-xl text-yellow-500">{author?.name2 || "Unknown"}</div>
+            <div className="font-bold text-xl text-yellow-500 ml-2">{author?.sigil || "Unknown"}</div>
+            
             </div>
             <div className="text-gray-500 text-l">@{author?.username || "anonymous"} 
                 {!big?(<span className="text-gray-500 ml-4"> 
@@ -64,11 +64,11 @@ const formattedDate = date.toLocaleDateString("en-US", {
 
         {big?(
           <div>
-          <PostButtons id={_id}  likesCount={likesCount} likedByMe={likedByMe}></PostButtons>
+          <PostButtons id={_id}  likesCount={likesCount} likedByMe={likedByMe} commentsCount={commentsCount}></PostButtons>
         </div>
         ):(
           <div>
-          <PostButtons id={_id} likesCount={likesCount} likedByMe={likedByMe}></PostButtons>
+          <PostButtons id={_id} likesCount={likesCount} likedByMe={likedByMe} commentsCount={commentsCount}></PostButtons>
         </div>
         )}
         
