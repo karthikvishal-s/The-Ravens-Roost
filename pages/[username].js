@@ -35,7 +35,7 @@ export default function UserPage() {
       </div>
 
       <div className="mt-7">
-        <Cover src={`${userData?.sigil || 'Targaryen'}.jpg`} />
+        <Cover src={`${userData?.sigil }.jpg`} />
       </div>
     </Layout>
   );
