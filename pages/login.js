@@ -35,7 +35,7 @@ export default function Login({ providers }) {
               className="flex items-center justify-center bg-white text-black px-6 py-3 rounded-full font-semibold shadow hover:scale-105 transition-all"
             >
               <img src="/google.png" alt="Google icon" className="h-6 w-6 mr-3" />
-              Sign in with {provider.name}
+              Sign in withe {provider.name}
             </button>
           </div>
         ))
