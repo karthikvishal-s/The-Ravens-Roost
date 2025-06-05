@@ -10,6 +10,7 @@ import PostContent  from "@/components/PostContent";
 import Layout from "@/components/layout";
 import Router from "next/router";
 import { useRouter } from "next/router";
+import Spinner from "@/components/spinner";
 
 
 export default function Home() {
@@ -43,7 +44,7 @@ useEffect(() => {
 }, []);
 
 
-if (UserInfoStatus==="loading") return <div className="text-white">"Loading... user info "</div>;
+if (UserInfoStatus==="loading") return <Spinner></Spinner>
 
 if (!userInfo?.user?.username){
   return <UsernameForm />;

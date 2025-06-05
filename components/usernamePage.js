@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import useUserInfo from "@/hooks/useUserInfo";
 import { useRouter } from "next/router"; // ✅ Correct import
+import Spinner from "./spinner";
 
 export default function UsernameForm() {
     const { userInfo, status } = useUserInfo("");
@@ -51,7 +52,7 @@ export default function UsernameForm() {
     }
 
     if (status === "loading") {
-        return <div className="flex h-screen items-center justify-center bg-black text-white">Loading user info...</div>;
+        return  <Spinner></Spinner>
     }
 
     if (status === "unauthenticated") {
