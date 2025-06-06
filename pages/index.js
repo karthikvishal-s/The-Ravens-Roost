@@ -58,34 +58,47 @@ async function toUsernamePage(){
 
 
   return (
-    <>
-    <div className="flex items-center justify-center mt-10">
-        <button className="bg-red-500 px-5 py-2 rounded-full text-white text-xl" onClick={logout}>Logout</button>
+    <div>
+      <div className="h-30 text-center mt-10 t">
+      <h1 className="text-4xl font-bold p-4 text-yellow-500">Feed</h1>
       </div>
-      <div className="flex items-center justify-center mt-10">
-        <button className="bg-blue-500 px-5 py-2 rounded-full text-white text-xl" onClick={toUsernamePage}>Username page</button>
-      </div>
-    <Layout>
-      <h1 className="text-2xl font-bold p-4 text-3xl text-yellow-500">Feed</h1>
+
+      <div className=" w-140 mx-auto items-center justify-center flex mb-20 border-3 border-gray-800">
       <Postform  onPost={()=>{fetchHomePosts();}}/>
-      <div className="text-black">
+      </div>
+    
+    <Layout>
+      
+      
+      <div className="mx-auto">
+
+      
+      
+      
+      <div>
         
         {posts.length>0 && posts.map(post => (
-          <div key=
-          {post._id} className=" border-t border-gray-500 p-5 font-bold w-110 ml-8">
+          <div  key=
+          {post._id} className=" border border-gray-500 p-5 font-bold w-full  ">
             <PostContent {...post}  likedByMe={idsLikedByMe.includes(post._id)} refreshPosts={fetchHomePosts}/>
           </div>
         ))}     
+
       </div>
+
+
+
       <div className="flex items-center justify-center mt-10">
         <button className="bg-red-500 px-5 py-2 rounded-full text-white text-xl" onClick={logout}>Logout</button>
       </div>
       <div className="flex items-center justify-center mt-10">
         <button className="bg-blue-500 px-5 py-2 rounded-full text-white text-xl" onClick={toUsernamePage}>Username page</button>
       </div>
+      </div>
+      
       </Layout>
       
-    </>
+    </div>
       
     
   )

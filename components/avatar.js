@@ -4,7 +4,7 @@ import Spinner from "./spinner";
 export default function Avatar({ src }) {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(false);
-  const fallbackAvatar = "/stark.jpg";
+ 
 
   return (
     <div className="relative mt-2 ml-2 h-12 w-12">
@@ -24,7 +24,7 @@ export default function Avatar({ src }) {
       )}
 
       <img
-        src={error ? fallbackAvatar : src}
+        src={src}
         alt="avatar"
         onLoad={() => setLoading(false)}
         onError={() => {
