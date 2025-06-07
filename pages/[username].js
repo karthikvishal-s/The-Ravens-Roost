@@ -3,6 +3,7 @@ import Cover from '@/components/cover';
 import Layout from '@/components/layout';
 import { useRouter } from 'next/router';
 import axios from 'axios';
+import Avatar from '@/components/avatar';
 import { useEffect, useState } from 'react';
 
 export default function UserPage() {
@@ -36,6 +37,9 @@ export default function UserPage() {
 
       <div className="mt-7">
         <Cover src={`${userData?.sigil }.jpg`} />
+      </div>
+      <div className='relative -top-20 ml-10'>
+        <Avatar src={userData?.image} profile />
       </div>
     </Layout>
   );
