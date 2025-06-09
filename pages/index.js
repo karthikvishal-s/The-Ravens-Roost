@@ -6,27 +6,32 @@ import { useState, useEffect } from "react";
 import { signOut, useSession } from "next-auth/react";
 import PostContent from "@/components/PostContent";
 import Layout from "@/components/layout";
-import { useRouter } from "next/router";
 import Spinner from "@/components/spinner";
+import { useRouter } from "next/router";
 import { FaHome, FaSearch, FaEnvelope, FaBell, FaCog, FaPowerOff } from "react-icons/fa";
 import { GiPlagueDoctorProfile } from "react-icons/gi";
 import { IoIosMore } from "react-icons/io";
 import Link from "next/link";
 
 export default function Home() {
-  const { data: session ,status} = useSession();
-  const { userInfo, UserInfoStatus, setUserInfo } = useUserInfo();
+  const { data: session, status } = useSession();
+  const { userInfo, loading: userInfoLoading } = useUserInfo(); // Renamed to "loading" for clarity
   const [posts, setPosts] = useState([]);
   const [idsLikedByMe, setIdsLikedByMe] = useState([]);
   const router = useRouter();
 
-
+  // Fetch posts only if authenticated and userInfo is ready
+  useEffect(() => {
+    if (status === "authenticated" && userInfo) {
+      fetchHomePosts();
+    }
+  }, [status, userInfo]);
 
   async function fetchHomePosts() {
     try {
-      const response = await axios.get("/api/posts");
-      setPosts(response.data.posts || []);
-      setIdsLikedByMe(response.data.idsLikedByMe || []);
+      const res = await axios.get("/api/posts");
+      setPosts(res.data.posts || []);
+      setIdsLikedByMe(res.data.idsLikedByMe || []);
     } catch (err) {
       console.error("Error fetching posts:", err);
     }
@@ -36,60 +41,35 @@ export default function Home() {
     await signOut({ callbackUrl: "/login" });
   }
 
-  console.log("Status:", status);
-
-  useEffect(() => {
-    console.log("UserInfoStatus:", status);
-    
-    if (status === "authenticated") {
-      fetchHomePosts();
-      console.log("User is authenticated:", userInfo);
-      
-    }
-
-  }, [status]);
-
-  if (!userInfo?.user?.username) return <UsernameForm />;
-
-  if (UserInfoStatus === "loading") return <Spinner />;
-  
-  
-
-
-  
-
-
-
-
-
-  
+  if (status === "loading" || userInfoLoading) return <Spinner />;
+  if (!userInfo) return <UsernameForm />;
 
   return (
     <div className="relative min-h-screen bg-black text-white flex">
       {/* Left Sidebar */}
-      <div className="fixed  left-0 pt-80 pl-6 pr-6 h-full border-r border-gray-700 flex flex-col gap-8 z-50">
+      <aside className="fixed left-0 pt-40 pl-6 pr-6 h-full border-r border-gray-700 flex flex-col gap-8 z-50">
         <SidebarIcon icon={<FaHome />} label="Home" />
         <SidebarIcon icon={<FaSearch />} label="Explore" />
         <SidebarIcon icon={<FaEnvelope />} label="Messages" />
         <SidebarIcon icon={<FaBell />} label="Notifications" />
         <SidebarIcon icon={<FaCog />} label="Settings" />
-        <Link href={"/profile"}>
-          <SidebarIcon icon={<GiPlagueDoctorProfile  />} label="Profile" />
+        <Link href="/profile">
+          <SidebarIcon icon={<GiPlagueDoctorProfile />} label="Profile" />
         </Link>
         <SidebarIcon icon={<IoIosMore />} label="More" />
-      </div>
+      </aside>
 
-      {/* Right Sidebar */}
-      <div className="fixed right-0  pr-15 z-50 -top-10 ">
+      {/* Right Sidebar - Logout Icon */}
+      <div className="fixed right-0 pr-6 z-50 mt-20">
         <FaPowerOff
-          className="text-3xl hover:text-yellow-400 cursor-pointer mt-20"
+          className="text-3xl hover:text-yellow-400 cursor-pointer"
           title="Logout"
           onClick={() => router.push("/logoutsurity")}
         />
       </div>
 
       {/* Main Content */}
-      <div className="flex-grow pl-32 pr-32 mt-10 w-full max-w-5xl mx-auto">
+      <main className="flex-grow pl-32 pr-32 mt-10 w-full max-w-5xl mx-auto">
         <h1 className="text-4xl font-bold p-4 text-yellow-500 text-center">Feed</h1>
 
         <div className="flex justify-center mb-10">
@@ -97,45 +77,43 @@ export default function Home() {
         </div>
 
         <Layout>
-          <div>
-            {posts.length > 0 &&
-              posts.map((post) => (
-                <div key={post._id} className="border border-gray-500 p-5 font-bold w-full">
-                  <PostContent
-                    {...post}
-                    likedByMe={idsLikedByMe.includes(post._id)}
-                    refreshPosts={fetchHomePosts}
-                  />
-                </div>
-              ))}
-          </div>
+          {posts.length > 0 ? (
+            posts.map((post) => (
+              <div key={post._id} className="border border-gray-500 p-5 font-bold w-full">
+                <PostContent
+                  {...post}
+                  likedByMe={idsLikedByMe.includes(post._id)}
+                  refreshPosts={fetchHomePosts}
+                />
+              </div>
+            ))
+          ) : (
+            <p className="text-center text-gray-400 mt-8">No posts yet. Be the first to post!</p>
+          )}
 
-          <div className="flex items-center justify-center mt-10">
+          <div className="flex justify-center mt-10 space-x-6">
             <button
-              className="bg-red-500 px-5 py-2 rounded-full text-white text-xl"
+              className="bg-red-500 px-6 py-2 rounded-full text-white text-xl"
               onClick={logout}
             >
               Logout
             </button>
-          </div>
-
-          <div className="flex items-center justify-center mt-10">
             <button
-              className="bg-blue-500 px-5 py-2 rounded-full text-white text-xl"
+              className="bg-blue-500 px-6 py-2 rounded-full text-white text-xl"
               onClick={() => router.push("/usernamePage")}
             >
               Username Page
             </button>
           </div>
         </Layout>
-      </div>
+      </main>
     </div>
   );
 }
 
 function SidebarIcon({ icon, label }) {
   return (
-    <div className="border border-black flex items-center text-4xl p-2 hover:text-yellow-400 cursor-pointer rounded-full  ">
+    <div className="border border-black flex items-center text-4xl p-2 hover:text-yellow-400 cursor-pointer rounded-full">
       {icon}
       <span className="ml-4 hidden lg:block text-xl font-bold">{label}</span>
     </div>
