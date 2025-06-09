@@ -83,6 +83,7 @@ export default function PostContent({
           likesCount={likesCount}
           likedByMe={likedByMe}
           commentsCount={commentsCount}
+          author={author}
         />
       </div>
     </>

@@ -2,13 +2,17 @@ import axios from 'axios';
 import { useState } from 'react';
 import React from 'react';
 
+import Link from 'next/link';
+
 
 
 export default function PostButtons({id,
     likesCount:likesCountDefault=0,
     likedByMe:likedByMeDefault = false,
     commentsCount,
-    refreshPosts})
+    refreshPosts,
+    author,
+    })
     
     {
     const [likesCount, setLikesCount] = useState(likesCountDefault);
@@ -47,10 +51,10 @@ export default function PostButtons({id,
                 <span className="ml-3">0</span>
             </button>
 
-            <button className="text-xl text-gray-600 flex mr-3">
-                <   img src={'/manuscript.png'} className="w-7"></img>
-                <span className="ml-3">{commentsCount}</span>
-            </button>
+            <Link  href={`/${author?.username || "Unknown"}/status/${id}`} className="text-xl text-gray-600 flex mr-3 hover: scale-130">
+                <   img src={'/manuscript.png'} className="w-7 hover:scale-130"></img>
+                <span className="ml-3 ">{commentsCount}</span>
+            </Link>
 
         </div>
     )
