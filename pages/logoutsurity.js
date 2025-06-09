@@ -10,7 +10,7 @@ export default function LogoutSurity() {
 
   async function logout() {
     await signOut();
-    router.push("/"); // Or login page
+    router.push("/login"); // Or login page
   }
 
   return (

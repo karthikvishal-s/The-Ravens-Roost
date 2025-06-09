@@ -3,14 +3,7 @@ import useUserInfo from "@/hooks/useUserInfo";
 import { useRouter } from "next/router"; // ✅ Correct import
 import Spinner from "./spinner";
 
-export default function UsernameForm() {
-
-
-    
-
-
-
-
+export default function UsernameForm(profile=false) {
     const { userInfo, status } = useUserInfo("");
     const [username, setUsername] = useState("");
     const [sigil,setSigil] = useState("");

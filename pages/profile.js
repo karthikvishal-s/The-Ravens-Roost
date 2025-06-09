@@ -6,6 +6,8 @@ import BackArrow from "@/components/backArrow";
 import Targaryen from "./houses/targaryen";
 import Stark from "./houses/stark";
 import Link from "next/link";
+import Lannister from "./houses/lannister";
+import Baratheon from "./houses/barratheon";
 
 
 
@@ -56,7 +58,7 @@ if (userInfo?.user?.sigil === "Greyjoy") {
               <div className="mt-7">
                 <Cover src={`${userInfo?.user?.sigil }.jpg`} />
               </div>
-              <div className='relative -top-20 ml-10 border-2 border-black'>
+              <div className='relative -top-20 ml-10 '>
                 <Avatar src={userInfo?.user?.image} profile />
               </div>
               
@@ -75,14 +77,14 @@ if (userInfo?.user?.sigil === "Greyjoy") {
               </div>
 
               <div>
-                <Link href={"/"} className={`rounded-full ${btnclr} p-3 text-lg  font-bold  ml-60 ${txtclr}`}>
+                <Link href={"/usernamePage"} className={`rounded-full ${btnclr} p-3 text-lg  font-bold  ml-60 ${txtclr}`}>
                 Edit Profile
                 </Link>
               </div>
               </div>
 
 
-              <Stark />
+              <Lannister />
               
             </Layout>
     )
