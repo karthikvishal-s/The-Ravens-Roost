@@ -43,7 +43,7 @@ console.log("userInfo", userInfo);
   }, []);
 
   if (UserInfoStatus === "loading") return <Spinner />;
-  if (!userInfo?.user?.username) return <UsernameForm />;
+  //if (!userInfo?.user?.username) return <UsernameForm />;
 
 
 
