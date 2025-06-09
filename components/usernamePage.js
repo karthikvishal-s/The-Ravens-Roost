@@ -4,6 +4,13 @@ import { useRouter } from "next/router"; // ✅ Correct import
 import Spinner from "./spinner";
 
 export default function UsernameForm() {
+
+
+    
+
+
+
+
     const { userInfo, status } = useUserInfo("");
     const [username, setUsername] = useState("");
     const [sigil,setSigil] = useState("");

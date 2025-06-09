@@ -4,7 +4,7 @@ export default function Avatar({ src, profile = false }) {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(false);
 
-  const size = profile ? "w-30 h-30" : "w-12 h-12";
+  const size = profile ? "w-40 h-40" : "w-12 h-12";
 
   return (
     <div className={`relative mt-2 ml-2 ${size}`}>
@@ -28,14 +28,16 @@ export default function Avatar({ src, profile = false }) {
       )}
 
       <img
-        src={error ? "/default-avatar.png" : src} // Fallback image
+
+
+        src={error ? "/stark.jpg" : src} // Fallback image
         alt="avatar"
         onLoad={() => setLoading(false)}
         onError={() => {
           setLoading(false);
           setError(true);
         }}
-        className={`rounded-full object-cover transition-opacity duration-500 ${size} ${
+        className={`rounded-full object-cover transition-opacity duration-500 ${profile?"border-10":""} ${size} ${
           loading ? "opacity-0" : "opacity-100"
         }`}
       />

@@ -16,7 +16,7 @@ export default function UserPage() {
     if (!username) return;
     try {
       const response = await axios.get(`/api/users?username=${username}`);
-      setUserData(response.data.user); // assuming you send { user: data }
+      setUserData(response.data.user); 
     } catch (err) {
       console.error('Error fetching user:', err);
     }

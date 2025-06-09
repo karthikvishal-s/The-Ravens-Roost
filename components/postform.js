@@ -27,7 +27,7 @@ export default function Postform({onPost,compact,placeholder,parent}){
   if (status === "Loading"){
     return " ";
   }
-console.log("User Info:", userInfo);
+
     return (
         <form onSubmit={handlePostSubmit}  className="mt-5 ">
           {compact?(

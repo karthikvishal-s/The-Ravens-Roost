@@ -6,8 +6,7 @@ export default function useUserInfo() {
   const [userInfo, setUserInfo] = useState(null);
   const [status, setStatus] = useState("loading");
 
-  console.log("sessionStatus:", sessionStatus);
-  console.log("session:", session);
+
 
   useEffect(() => {
     const fetchUserInfo = async () => {

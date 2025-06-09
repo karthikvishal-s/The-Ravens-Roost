@@ -2,6 +2,7 @@ import { getProviders, signIn, useSession } from "next-auth/react";
 import { useRouter } from "next/router";
 import { useEffect } from "react";
 import { useState} from "react"
+import Link from "next/link";
 
 export default function Login({ providers }) {
   const { data: session, status } = useSession();
@@ -64,6 +65,12 @@ export default function Login({ providers }) {
           </div>
         ))
       )}
+
+      <div>
+        <Link href="/about" className="text-blue-500 hover:underline mt-10">
+        <h1>Hello</h1>
+        </Link>
+      </div>
     </div>
   );
 }
