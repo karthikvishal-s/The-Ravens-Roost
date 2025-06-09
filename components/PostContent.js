@@ -11,7 +11,9 @@ export default function PostContent({
   likedByMe,
   _id,
   big = false,
-  commentsCount
+  commentsCount,
+  savedCount,
+  savedByMe,
 }) {
   const date = new Date(createdAt);
 
@@ -22,7 +24,7 @@ export default function PostContent({
     hour: "2-digit",
     minute: "2-digit"
   });
-
+  console.log("savedByMe", savedByMe);
   return (
     <>
       <div className="flex gap-5 p-4">
@@ -81,6 +83,8 @@ export default function PostContent({
         <PostButtons
           id={_id}
           likesCount={likesCount}
+          savedCount={savedCount}
+          savedByMe={savedByMe} // Assuming savedByMe is not passed to this component
           likedByMe={likedByMe}
           commentsCount={commentsCount}
           author={author}

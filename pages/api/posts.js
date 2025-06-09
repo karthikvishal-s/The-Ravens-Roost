@@ -2,6 +2,7 @@ import { initMongoose } from "@/lib/mongoose";
 import Post from "@/models/Post";
 import User from "@/models/User";
 import Like from "@/models/Like";
+import Saved from "@/models/Saved";
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/pages/api/auth/[...nextauth]";
 
@@ -43,11 +44,18 @@ export default async function handler(req, res) {
         post: posts.map((p) => p._id),
       });
 
+      const postsSavedByMe = await Saved.find({
+        author: userId,
+        post: posts.map((p) => p._id),
+      });
+
       const idsLikedByMe = postsLikedByMe.map((like) => like.post.toString());
+      const idsSavedByMe = postsSavedByMe.map((save) => save.post.toString());
 
       return res.status(200).json({
         posts,
         idsLikedByMe,
+        idsSavedByMe,
       });
     } catch (err) {
       return res.status(500).json({ error: "Error fetching posts" });

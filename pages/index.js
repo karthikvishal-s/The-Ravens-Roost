@@ -12,12 +12,14 @@ import { FaHome, FaSearch, FaEnvelope, FaBell, FaCog, FaPowerOff } from "react-i
 import { GiPlagueDoctorProfile } from "react-icons/gi";
 import { IoIosMore } from "react-icons/io";
 import Link from "next/link";
+import { FaBookBookmark } from "react-icons/fa6";
 
 export default function Home() {
   const { data: session, status } = useSession();
   const { userInfo, loading: userInfoLoading } = useUserInfo(); // Renamed to "loading" for clarity
   const [posts, setPosts] = useState([]);
   const [idsLikedByMe, setIdsLikedByMe] = useState([]);
+  const [idsSavedByMe, setIdsSavedByMe] = useState([]);
   const router = useRouter();
 
   // Fetch posts only if authenticated and userInfo is ready
@@ -32,6 +34,7 @@ export default function Home() {
       const res = await axios.get("/api/posts");
       setPosts(res.data.posts || []);
       setIdsLikedByMe(res.data.idsLikedByMe || []);
+      setIdsSavedByMe(res.data.idsSavedByMe || []);
     } catch (err) {
       console.error("Error fetching posts:", err);
     }
@@ -42,7 +45,7 @@ export default function Home() {
   }
 
   if (status === "loading" || userInfoLoading) return <Spinner />;
-  if (!userInfo) return <UsernameForm />;
+  if (!userInfo?.user?.username) return <UsernameForm />;
 
   return (
     <div className="relative min-h-screen bg-black text-white flex">
@@ -51,8 +54,11 @@ export default function Home() {
         <SidebarIcon icon={<FaHome />} label="Home" />
         <SidebarIcon icon={<FaSearch />} label="Explore" />
         <SidebarIcon icon={<FaEnvelope />} label="Messages" />
-        <SidebarIcon icon={<FaBell />} label="Notifications" />
-        <SidebarIcon icon={<FaCog />} label="Settings" />
+       
+        <Link href="/savedposts">
+        <SidebarIcon icon={<FaBookBookmark />} label="Saved" />
+        </Link>
+        
         <Link href="/profile">
           <SidebarIcon icon={<GiPlagueDoctorProfile />} label="Profile" />
         </Link>
@@ -83,6 +89,7 @@ export default function Home() {
                 <PostContent
                   {...post}
                   likedByMe={idsLikedByMe.includes(post._id)}
+                  savedByMe={idsSavedByMe.includes(post._id)}
                   refreshPosts={fetchHomePosts}
                 />
               </div>

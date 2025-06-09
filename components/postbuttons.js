@@ -9,6 +9,8 @@ import Link from 'next/link';
 export default function PostButtons({id,
     likesCount:likesCountDefault=0,
     likedByMe:likedByMeDefault = false,
+    savedCount:savedCountDefault=0,
+    savedByMe: savedByMeDefault = false,
     commentsCount,
     refreshPosts,
     author,
@@ -18,6 +20,12 @@ export default function PostButtons({id,
     const [likesCount, setLikesCount] = useState(likesCountDefault);
     
     const [likedByMe, setLikedByMe] = useState(likedByMeDefault);
+
+    const [savedCount, setSavedCount] = useState(savedCountDefault);
+    const [savedByMe, setSavedByMe] = useState(savedByMeDefault);
+    
+   
+
     async function togglelike(){
         const response= await axios.post('/api/like', {id});
         
@@ -29,6 +37,22 @@ export default function PostButtons({id,
         else{
             setLikesCount(prev=> prev - 1);
             setLikedByMe(false);
+        }
+        if (refreshPosts) refreshPosts();
+    }
+
+
+    async function togglesave(){
+        const response= await axios.post('/api/saved', {id});
+        
+        if(response.data.saved ){
+            setSavedCount(prev=> prev + 1);
+            setSavedByMe(true);
+
+    }
+        else{
+            setSavedCount(prev=> prev - 1);
+            setSavedByMe(false);
         }
         if (refreshPosts) refreshPosts();
     }
@@ -46,15 +70,18 @@ export default function PostButtons({id,
                 <span className="ml-3">0</span>
             </button>
 
-            <button className="text-xl text-gray-600 flex">
-                <img src={'/crow.png'} className="w-7"></img>
-                <span className="ml-3">0</span>
-            </button>
-
-            <Link  href={`/${author?.username || "Unknown"}/status/${id}`} className="text-xl text-gray-600 flex mr-3 hover: scale-130">
+            <Link  href={`/${author?.username || "Unknown"}/status/${id}`} className="text-xl text-gray-600 flex  hover: scale-130">
                 <   img src={'/manuscript.png'} className="w-7 hover:scale-130"></img>
                 <span className="ml-3 ">{commentsCount}</span>
             </Link>
+
+            <button onClick={togglesave} className={(savedByMe?'text-xl text-gray-600 flex mr-3':'text-xl text-gray-600 flex mr-3 filter grayscale')}> 
+                <img src={'/bookmark.png'} className="w-7 hover:scale-130"></img>
+                <span className="ml-3">{savedCount}</span>
+              
+            </button>
+
+            
 
         </div>
     )

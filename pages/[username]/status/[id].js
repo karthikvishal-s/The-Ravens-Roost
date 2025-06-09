@@ -45,8 +45,10 @@ export default function PostPage() {
     return (
         <Layout>
             <div className='flex '>
+            <h1 className='w-9 mr-5 mb-10 mt-5'>
             <BackArrow destination='/'></BackArrow>
-            <h1 className='text-2xl text-bold ml-4 mb-5 text-white'>Realm</h1>
+            </h1>
+            <h1 className='text-2xl text-bold ml-4 mb-5 mt-5 text-white'>Realm</h1>
             </div>
 
             {post && (
