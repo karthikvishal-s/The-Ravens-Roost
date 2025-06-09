@@ -14,13 +14,13 @@ import { IoIosMore } from "react-icons/io";
 import Link from "next/link";
 
 export default function Home() {
+  const { data: session ,status} = useSession();
   const { userInfo, UserInfoStatus, setUserInfo } = useUserInfo();
   const [posts, setPosts] = useState([]);
   const [idsLikedByMe, setIdsLikedByMe] = useState([]);
   const router = useRouter();
 
 
-console.log("userInfo", userInfo);
 
   async function fetchHomePosts() {
     try {
@@ -36,14 +36,27 @@ console.log("userInfo", userInfo);
     await signOut({ callbackUrl: "/login" });
   }
 
-
+  console.log("Status:", status);
 
   useEffect(() => {
-    fetchHomePosts();
-  }, []);
+    console.log("UserInfoStatus:", status);
+    
+    if (status === "authenticated") {
+      fetchHomePosts();
+      console.log("User is authenticated:", userInfo);
+      
+    }
+
+  }, [status]);
+
+  if (!userInfo?.user?.username) return <UsernameForm />;
 
   if (UserInfoStatus === "loading") return <Spinner />;
-  //if (!userInfo?.user?.username) return <UsernameForm />;
+  
+  
+
+
+  
 
 
 
