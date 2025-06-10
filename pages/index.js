@@ -100,20 +100,7 @@ export default function Home() {
             <p className="text-center text-gray-400 mt-8">No posts yet. Be the first to post!</p>
           )}
 
-          <div className="flex justify-center mt-10 space-x-6">
-            <button
-              className="bg-red-500 px-6 py-2 rounded-full text-white text-xl"
-              onClick={logout}
-            >
-              Logout
-            </button>
-            <button
-              className="bg-blue-500 px-6 py-2 rounded-full text-white text-xl"
-              onClick={() => router.push("/usernamePage")}
-            >
-              Username Page
-            </button>
-          </div>
+        
         </Layout>
       </main>
     </div>
