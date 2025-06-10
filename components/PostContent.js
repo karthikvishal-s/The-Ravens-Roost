@@ -42,14 +42,14 @@ export default function PostContent({
             {/* Author name and username */}
             <div className="flex items-center flex-wrap">
               <Link href={`/${author?.username}`}>
-                <span className="font-bold text-xl text-yellow-500">{author?.name2 || "Unknown"}</span>
+                <span className="font-bold text-2xl text-yellow-500 font-cinzel_bold">{author?.name2 || "Unknown"}</span>
               </Link>
               <Link href={`/${author?.username}`}>
-                <span className="font-bold text-xl text-yellow-500 ml-2">{author?.sigil || "Unknown"}</span>
+                <span className="font-bold text-xl text-yellow-500 ml-2 font-aboreto">{author?.sigil || "Unknown"}</span>
               </Link>
             </div>
 
-            <div className="text-gray-500 text-base">
+            <div className="text-gray-400 text-base font-rocker">
               @{author?.username || "anonymous"}
               {!big && createdAt && (
                 <span className="ml-4">
@@ -60,7 +60,7 @@ export default function PostContent({
 
             {/* Post text (small view) */}
             {!big && (
-              <div className="mt-2 mb-2 ml-2">
+              <div className="mt-5 mb-2 ml-2 text-2xl font-maiden">
                 {text}
               </div>
             )}
@@ -71,7 +71,7 @@ export default function PostContent({
       {/* Post content for full view */}
       {big && (
         <div className="px-7">
-          <p className="text-gray-100 text-xl mb-4">{text}</p>
+          <p className="text-gray-100 text-2xl mb-4 font-maiden ">{text}</p>
           <h1 className="text-gray-200 text-base font-semibold">
             <span className="text-gray-400 mr-2">Posted on</span>{formattedDate}
           </h1>

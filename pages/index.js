@@ -50,8 +50,10 @@ export default function Home() {
   return (
     <div className="relative min-h-screen bg-black text-white flex">
       {/* Left Sidebar */}
-      <aside className="fixed left-0 pt-40 pl-6 pr-6 h-full border-r border-gray-700 flex flex-col gap-8 z-50">
+      <aside className="fixed left-0 pt-40 pl-6 pr-6 h-full border-r border-gray-700 flex flex-col gap-8 z-50 font-rocker font-bold ">
+        <Link href={'/login'}>
         <SidebarIcon icon={<FaHome />} label="Home" />
+        </Link>
         <SidebarIcon icon={<FaSearch />} label="Explore" />
         <SidebarIcon icon={<FaEnvelope />} label="Messages" />
        
@@ -76,7 +78,7 @@ export default function Home() {
 
       {/* Main Content */}
       <main className="flex-grow pl-32 pr-32 mt-10 w-full max-w-5xl mx-auto">
-        <h1 className="text-4xl font-bold p-4 text-yellow-500 text-center">Feed</h1>
+        <h1 className="text-6xl font-bold p-4 text-yellow-500 text-center font-ewert">Feed</h1>
 
         <div className="flex justify-center mb-10">
           <Postform onPost={fetchHomePosts} />

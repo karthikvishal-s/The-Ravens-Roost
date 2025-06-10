@@ -27,8 +27,8 @@ export default function SavedPostsPage() {
     <Layout>
         <BackArrow destination="/" />
       <div className="text-white max-w-2xl mx-auto mt-10">
-        <h1 className="text-3xl font-bold mb-6 text-yellow-500 text-center">
-           Saved Posts
+        <h1 className="text-5xl font-bold mb-6 text-yellow-500 text-center font-ewert mb-20">
+            Vault
         </h1>
 
         {loading ? (
@@ -37,7 +37,9 @@ export default function SavedPostsPage() {
           <p className="text-center text-gray-400">You haven't saved any posts yet.</p>
         ) : (
           posts.map(post => (
-            <PostContent key={post._id} {...post} />
+            <div className="border-t border-gray-700 mt-2 " key={post._id}>
+              <PostContent key={post._id} {...post} />
+              </div>
           ))
         )}
       </div>
