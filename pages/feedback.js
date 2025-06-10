@@ -1,6 +1,8 @@
 import { useState } from 'react';
 import { Send, Crown, FileText, Scroll, Star, AlertCircle, CheckCircle, ArrowLeft, Shield, Zap } from 'lucide-react';
 import Link from 'next/link';
+import BackArrow from '@/components/backArrow';
+
 export default function FeedbackForm() {
   const [formData, setFormData] = useState({
     name: '',
@@ -60,6 +62,10 @@ export default function FeedbackForm() {
   if (submitted) {
     return (
       <div className="min-h-screen bg-gradient-to-br from-gray-900 via-red-900 to-black text-white flex items-center justify-center p-6">
+       <h1 className='w-9 mr-5 mb-10 mt-5 relative -top-140 -left-60'>
+                           <BackArrow destination='/login'></BackArrow>
+                           </h1>
+       
         <div className="max-w-xl w-full">
           <div className="bg-gradient-to-br from-green-900/30 to-black/50 backdrop-blur-sm rounded-2xl p-8 border-2 border-green-500/30 text-center shadow-2xl shadow-green-500/20">
             <CheckCircle className="w-16 h-16 text-green-400 mx-auto mb-6 animate-pulse" />
@@ -248,7 +254,7 @@ export default function FeedbackForm() {
                 {isSubmitting ? (
                   <>
                     <div className="w-6 h-6 border-2 border-black border-t-transparent rounded-full animate-spin"></div>
-                    Dispatching Raven...
+                    Sending
                   </>
                 ) : (
                   <>Submit</>

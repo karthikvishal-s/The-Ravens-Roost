@@ -21,8 +21,7 @@ export default function PostContent({
     year: "numeric",
     month: "long",
     day: "numeric",
-    hour: "2-digit",
-    minute: "2-digit"
+  
   });
   console.log("savedByMe", savedByMe);
   return (
@@ -49,7 +48,7 @@ export default function PostContent({
               </Link>
             </div>
 
-            <div className="text-gray-400 text-base font-rocker">
+            <div className="text-gray-400 text-base">
               @{author?.username || "anonymous"}
               {!big && createdAt && (
                 <span className="ml-4">
@@ -71,9 +70,9 @@ export default function PostContent({
       {/* Post content for full view */}
       {big && (
         <div className="px-7">
-          <p className="text-gray-100 text-2xl mb-4 font-maiden ">{text}</p>
+          <p className="text-gray-100 text-2xl mb-4 ">{text}</p>
           <h1 className="text-gray-200 text-base font-semibold">
-            <span className="text-gray-400 mr-2">Posted on</span>{formattedDate}
+            <span className="text-gray-400 mr-2 ml-100">Posted on</span>{formattedDate}
           </h1>
         </div>
       )}

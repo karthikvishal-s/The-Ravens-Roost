@@ -25,7 +25,9 @@ export default function SavedPostsPage() {
 
   return (
     <Layout>
-        <BackArrow destination="/" />
+        <h1 className='w-9 mr-5 mb-10 mt-5'>
+                    <BackArrow destination='/'></BackArrow>
+                    </h1>
       <div className="text-white max-w-2xl mx-auto mt-10">
         <h1 className="text-5xl font-bold mb-6 text-yellow-500 text-center font-ewert mb-20">
             Vault
