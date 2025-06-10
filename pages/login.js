@@ -5,7 +5,7 @@ import { useState} from "react"
 import Link from "next/link";
 import { useRef } from "react";
 import { Volume2, VolumeX } from "lucide-react"; // optional: lucide-react icons
-
+import { FaPowerOff } from "react-icons/fa";
 
 export default function Login({ providers }) {
   const { data: session, status } = useSession();
@@ -69,16 +69,37 @@ export default function Login({ providers }) {
 
   return (
     <div>
+    
+      
     <button
         onClick={toggleMute}
         className="mt-8 text-white hover:text-yellow-400 transition duration-200 ml-8"
       >
         {muted ? <VolumeX size={28} /> : <Volume2 size={28} />}
       </button>
+          {statusbool && (
+            <div className="text-white right-0 fixed top-0 pr-6 z-50 mt-10 mr-5">
+            <FaPowerOff
+
+              className="text-3xl hover:text-yellow-400 cursor-pointer"
+              title="Logout"
+              onClick={() => router.push("/logoutsurity")}
+            />
+          
+          </div>
+          )}
+
+
+      
+
+
+
     <div className="flex flex-col items-center justify-center h-screen text-2xl text-white">
       
       <audio ref={audioRef} src="/audio/got_theme.mp3"  loop autoPlay muted={muted} />
 
+
+      
       <h1 className={`mb-10 font-cinzel_bold text-yellow-400 text-6xl font-bold transition-all duration-[3000ms] ease-out ${loaded?'transform translate-y-0 opacity-100':'transform translate-y-full opacity-0'}`}>The Raven's Roost </h1>
       {statusbool}
       
@@ -94,14 +115,14 @@ export default function Login({ providers }) {
             <button
               onClick={async () => {
                 await signIn(provider.id, {
-                  callbackUrl: "/",
+                  callbackUrl: "/login",
                   prompt: "select_account", // Prompt account selection if multiple
                 });
               }}
-              className="flex items-center justify-center bg-white text-black px-6 py-3 rounded-full font-semibold shadow hover:scale-105 transition-all"
+              className="flex items-center justify-center bg-yellow-400 text-black px-6 py-3 rounded-full font-rocker text-4xl shadow hover:scale-105 transition-all mt-10"
             >
-              <img src="/google.png" alt="Google icon" className="h-6 w-6 mr-3" />
-              Sign in with {provider.name}
+              <img src="/google.png" alt="Google icon" className="h-13 w-13 mr-3  p-2 rounded-full bg-white mr-6" />
+              Join the Roost
             </button>
           </div>
         ))
@@ -109,28 +130,30 @@ export default function Login({ providers }) {
 
       
         }
-      <div className="flex flex-col items-center mt-20">
-      <div>
-        <Link href="/" className="text-blue-500 hover:text-red-600">
-        <h1 className={`mb-5 font-rocker text-gray-400 text-2xl font-bold transition-all duration-[1000ms] hover:text-blue-400 delay-[600ms] ease-out ${loaded?'transform translate-y-0 opacity-100':'transform translate-y-full opacity-0'}`}>Realm</h1>
-        </Link>
-      </div>
-      <div>
-        <Link href="/about" className="text-blue-500 hover:text-red-600">
-        <h1 className={`mb-5 font-rocker text-gray-400 text-2xl font-bold transition-all duration-[1000ms] hover:text-red-400 delay-[600ms] ease-out ${loaded?'transform translate-y-0 opacity-100':'transform translate-y-full opacity-0'}`}>Learn More</h1>
-        </Link>
-      </div>
-      <div>
-        <Link href="/about" className="text-yellow-500 hover:text-red-600">
-        <h1 className={`mb-5 font-rocker text-gray-400 text-2xl font-bold transition-all duration-[1000ms] hover:text-green-400 delay-[600ms] ease-out ${loaded?'transform translate-y-0 opacity-100':'transform translate-y-full opacity-0'}`}>Creator's Tale</h1>
-        </Link>
-      </div>
-      <div>
-        <Link href="/about" className="text-blue-500 hover:text-red-600">
-        <h1 className={`mb-10 font-rocker text-gray-400 text-2xl font-bold transition-all duration-[1000ms] hover:text-yellow-400 delay-[600ms] ease-out ${loaded?'transform translate-y-0 opacity-100':'transform translate-y-full opacity-0'}`}>Raven's cry</h1>
-        </Link>
-      </div>
-      </div>
+      {statusbool && (
+        <div className="flex flex-col items-center mt-20">
+        <div>
+          <Link href="/" className="text-blue-500 hover:text-red-600">
+          <h1 className={`mb-5 font-rocker text-gray-400 text-2xl font-bold transition-all duration-[1000ms] hover:text-blue-400 delay-[600ms] ease-out ${loaded?'transform translate-y-0 opacity-100':'transform translate-y-full opacity-0'}`}>Realm</h1>
+          </Link>
+        </div>
+        <div>
+          <Link href="/about" className="text-blue-500 hover:text-red-600">
+          <h1 className={`mb-5 font-rocker text-gray-400 text-2xl font-bold transition-all duration-[1000ms] hover:text-red-400 delay-[650ms] ease-out ${loaded?'transform translate-y-0 opacity-100':'transform translate-y-full opacity-0'}`}>Learn More</h1>
+          </Link>
+        </div>
+        <div>
+          <Link href="/about" className="text-yellow-500 hover:text-red-600">
+          <h1 className={`mb-5 font-rocker text-gray-400 text-2xl font-bold transition-all duration-[1000ms] hover:text-green-400 delay-[700ms] ease-out ${loaded?'transform translate-y-0 opacity-100':'transform translate-y-full opacity-0'}`}>Creator's Tale</h1>
+          </Link>
+        </div>
+        <div>
+          <Link href="/about" className="text-blue-500 hover:text-red-600">
+          <h1 className={`mb-10 font-rocker text-gray-400 text-2xl font-bold transition-all duration-[1000ms] hover:text-yellow-400 delay-[750ms] ease-out ${loaded?'transform translate-y-0 opacity-100':'transform translate-y-full opacity-0'}`}>Raven's cry</h1>
+          </Link>
+        </div>
+        </div>
+      )}
 
     </div>
     </div>

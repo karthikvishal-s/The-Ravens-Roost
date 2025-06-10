@@ -5,6 +5,13 @@ import { useRouter } from 'next/router';
 import axios from 'axios';
 import Avatar from '@/components/avatar';
 import { useEffect, useState } from 'react';
+import Link from 'next/link';
+import Targaryen from './houses/targaryen';
+import Stark from './houses/stark';
+import Baratheon from './houses/barratheon';
+import Lannister from './houses/lannister';
+import Tully from './houses/tully';
+
 
 export default function UserPage() {
   const router = useRouter();
@@ -15,7 +22,9 @@ export default function UserPage() {
   async function fetchUser() {
     if (!username) return;
     try {
+      
       const response = await axios.get(`/api/users?username=${username}`);
+      console.log('Fetched user data:', response.data);
       setUserData(response.data.user); 
     } catch (err) {
       console.error('Error fetching user:', err);
@@ -25,6 +34,9 @@ export default function UserPage() {
   useEffect(() => {
     fetchUser();
   }, [username]);
+
+
+
 
   return (
     <Layout>
@@ -41,6 +53,43 @@ export default function UserPage() {
       <div className='relative -top-20 ml-10'>
         <Avatar src={userData?.image} profile />
       </div>
+
+      <div className="text-white flex"> 
+                <p className="text-3xl ml-9 font-bold ">
+                 {userData?.name2 }
+                </p>
+                <p>
+                <span className="text-3xl ml-2 font-bold text-white">
+                  {userData?.sigil || "Stark"}
+                </span>
+                </p>
+              </div>
+
+              <div className="flex">
+              <div className="text-gray-400 flex"> 
+                <p className="text-xl ml-9 font-bold mt-3">
+                @  {userData?.username}
+                </p>
+              </div>
+
+             
+              </div>
+              <div>
+               {userData?.sigil === "Targaryen" && <Targaryen />}
+
+
+               {userData?.sigil === "Stark"&& <Stark />}
+
+
+                {userData?.sigil === "Baratheon"&& <Baratheon />}
+
+                {userData?.sigil === "Lannister"&& <Lannister />}
+
+                {userData?.sigil === "Tully" && <Tully />}
+               
+              </div>
+
+
     </Layout>
   );
 }

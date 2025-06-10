@@ -60,7 +60,7 @@ export default function PostContent({
 
             {/* Post text (small view) */}
             {!big && (
-              <div className="mt-5 mb-2 ml-2 text-2xl font-maiden">
+              <div className="mt-5 mb-2 ml-2 text-xl">
                 {text}
               </div>
             )}

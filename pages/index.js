@@ -58,7 +58,7 @@ export default function Home() {
         <SidebarIcon icon={<FaEnvelope />} label="Messages" />
        
         <Link href="/savedposts">
-        <SidebarIcon icon={<FaBookBookmark />} label="Saved" />
+        <SidebarIcon icon={<FaBookBookmark />} label="Scroll Vault" />
         </Link>
         
         <Link href="/profile">
