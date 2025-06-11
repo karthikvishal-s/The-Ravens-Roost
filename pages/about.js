@@ -75,7 +75,7 @@ export default function About() {
           <h1 className="font-cinzel_bold text-5xl md:text-7xl text-yellow-400 mb-6">
             The Raven's Roost
           </h1>
-          <p className="text-xl md:text-2xl text-gray-300 max-w-3xl mx-auto leading-relaxed">
+          <p className="text-l md:text-2xl text-gray-300 max-w-3xl mx-auto leading-relaxed">
           "A Game of Thrones-themed Twitter clone built from the ground up using modern fullstack technologies, merging fan-favorite fantasy elements with real-time social interaction."
           </p>
         </section>
@@ -89,13 +89,13 @@ export default function About() {
               The Motive Behind
             </h2>
             <div className="bg-black bg-opacity-30 backdrop-blur-sm rounded-2xl p-8 md:p-12 border border-yellow-400/20">
-              <p className="text-lg md:text-xl leading-relaxed mb-6 text-gray-200">
+              <p className="text-l md:text-xl leading-relaxed mb-6 text-gray-200">
               I wanted to challenge myself by building a full-stack application that was both technically ambitious and personally meaningful. A Twitter clone seemed like a great way to explore real-world features like authentication, real-time updates, and social interactions. But I didn’t want to stop at just replicating functionality—I wanted to build something I’d truly enjoy working on.
               </p>
-              <p className="text-lg md:text-xl leading-relaxed mb-6 text-gray-200">
+              <p className="text-l md:text-xl leading-relaxed mb-6 text-gray-200">
               As a fan of the Game of Thrones series, I saw an opportunity to bring that world into my project. Instead of tweets, users would send messages as “ravens,” inspired by the show’s lore. This creative twist gave the app its own identity and helped me stay engaged throughout the development process.
               </p>
-              <p className="text-lg md:text-xl leading-relaxed text-gray-200">
+              <p className="text-l md:text-xl leading-relaxed text-gray-200">
               That idea became The Raven’s Roost—a Game of Thrones-themed social media platform where fantasy meets function. It not only reflects my skills in full-stack development, but also my ability to bring creativity into technical work and build something unique from the ground up.
               </p>
             </div>
