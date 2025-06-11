@@ -12,6 +12,11 @@
   --background: #000000;
 }
 
+html, body {
+  height: 100%;
+  overflow: hidden;
+}
+
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);

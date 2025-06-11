@@ -56,7 +56,7 @@ export default function Login({ providers }) {
   }
 
   return (
-    <div className="relative min-h-screen bg-black">
+    <div className="relative h-screen bg-black overflow-hidden">
       {/* Mute Toggle */}
       <button
         onClick={toggleMute}
