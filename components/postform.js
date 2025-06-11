@@ -1,74 +1,73 @@
-
 import useUserInfo from "@/hooks/useUserInfo";
 import { useState } from "react";
 import axios from "axios";
 import Avatar from "./avatar";
 
+export default function Postform({ onPost, compact, placeholder, parent }) {
+  const { userInfo, status } = useUserInfo();
+  const [text, setText] = useState("");
 
-export default function Postform({onPost,compact,placeholder,parent}){
-    const { userInfo, status} = useUserInfo();
-    const [text,setText] = useState("");
+  const btn = "Comment";
+  const ph = placeholder || "Share your thought to the Realm...";
 
-    const btn= "Comment"
-    const ph = "Comment on this post..."
-
-  async function handlePostSubmit(e){
+  async function handlePostSubmit(e) {
     e.preventDefault();
-    await axios.post('/api/posts', {
-      text,parent
-    })
+    await axios.post("/api/posts", {
+      text,
+      parent,
+    });
     setText("");
-    if(onPost){
+    if (onPost) {
       onPost();
     }
-  
   }
 
-  if (status === "Loading"){
-    return " ";
-  }
+  if (status === "Loading") return null;
 
-    return (
-        <form onSubmit={handlePostSubmit}  className="mt-5 ">
-          {compact?(
-            <div className="flex items-center justify-center mt-10 mb-5">
-            <div className="flex">
-            <Avatar src={userInfo?.user?.image} />
-            <div className="justify-center items-center flex">
-              <textarea className="w-80 h-15 p-4 
-                   ml-10 rounded-lg mt-2 rounded-lg text-xl text-white " placeholder={compact?ph:"Share your thought to the Realm..."}
-               value={text} required onChange={(e)=> setText(e.target.value)}
-               ></textarea>
-            </div>
-            <button className=" bg-yellow-400 text-black p-2 rounded-full font-bold w-29 mt-4 ml-0 mb-5 hover:bg-yellow-300 ml-5">
-              {compact?btn:"Send a Raven"}
-             
-
+  return (
+    <form onSubmit={handlePostSubmit} className="w-full mt-5">
+      {compact ? (
+        <div className="flex items-start sm:items-center gap-4 px-2 sm:px-6">
+          <Avatar src={userInfo?.user?.image} />
+          <div className="flex flex-col sm:flex-row items-start sm:items-center w-full gap-3">
+            <textarea
+              className="flex-grow bg-gray-900 text-white rounded-lg px-4 py-2 text-base w-full sm:w-80 resize-none"
+              placeholder={ph}
+              value={text}
+              required
+              onChange={(e) => setText(e.target.value)}
+            />
+            <button
+              type="submit"
+              className="bg-yellow-400 text-black font-bold rounded-full px-4 py-2 hover:bg-yellow-300 transition-all"
+            >
+              {btn}
             </button>
           </div>
-
-          
-          </div>
-          ):(<>
-          <div className="flex items-center justify-center ">
+        </div>
+      ) : (
+        <>
+          <div className="mt-20 flex items-start gap-4 px-4 sm:px-10">
             <Avatar src={userInfo?.user?.image} />
-            <div className="justify-center items-center flex-1">
-              <textarea className="w-100 h-20  p-4
-               ml-4 mb-3 mt-6 rounded-lg mt-2 rounded-lg text-xl text-white" placeholder={compact?ph:"Share your thought to the Realm..."}
-               value={text} required onChange={(e)=> setText(e.target.value)}
-               ></textarea>
-            </div>
+            <textarea
+              className="flex-grow text-white rounded-lg px-4 py-3 text-lg resize-none w-full "
+              placeholder={ph}
+              value={text}
+              required
+              onChange={(e) => setText(e.target.value)}
+            />
           </div>
-          <div className="ml-8 border-t border-gray-500 w-110">
-            <button  className="bg-yellow-400 text-black p-2 rounded-full font-bold w-40 mt-4 ml-80 mb-5 hover:bg-yellow-300 cursor-pointer">
-              {compact?btn:"Send a Raven"}
-              <img src="/raven.png" alt="Raven" className="inline-block w-5 h-5 ml-2" />
-
+          <div className="flex justify-end px-4 sm:px-10 mt-4">
+            <button
+              type="submit"
+              className="bg-yellow-400 text-black font-bold rounded-full px-6 py-2 hover:bg-yellow-300 flex items-center gap-2"
+            >
+              Send a Raven
+              <img src="/raven.png" alt="Raven" className="w-5 h-5" />
             </button>
           </div>
-          </>
-            
-          )}
-      </form>
-    );
+        </>
+      )}
+    </form>
+  );
 }

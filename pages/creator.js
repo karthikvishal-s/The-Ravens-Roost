@@ -223,7 +223,7 @@ export default function Creator() {
               </button>
             </Link>
             <a 
-              href="https://github.com/karthikvishal-s" 
+              href="https://github.com/karthikvishal-s/Nexus" 
               target="_blank" 
               rel="noopener noreferrer"
               className="border-2 border-red-400 text-red-400 px-8 py-4 rounded-full font-bold text-xl hover:bg-red-400 hover:text-black transition-all duration-300 hover:scale-105 flex items-center gap-2 shadow-lg hover:shadow-red-500/50"

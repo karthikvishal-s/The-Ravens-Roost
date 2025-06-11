@@ -1,8 +1,6 @@
 import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
-
 import axios from 'axios';
-
 
 import PostContent from '@/components/PostContent';
 import Layout from '@/components/layout';
@@ -11,73 +9,73 @@ import useUserInfo from '@/hooks/useUserInfo';
 import Postform from '@/components/postform';
 import BackArrow from '@/components/backArrow';
 
-
-
-
 export default function PostPage() {
-    const router = useRouter();
-    const { id } = router.query
-    const [post, setPost] = useState();
-    const { userInfo } = useUserInfo();
-    const [replies, setReplies] = useState([]);
-    const [repliesLikedByMe, setRepliesLikedByMe] = useState([]);
+  const router = useRouter();
+  const { id } = router.query;
+  const [post, setPost] = useState();
+  const { userInfo } = useUserInfo();
+  const [replies, setReplies] = useState([]);
+  const [repliesLikedByMe, setRepliesLikedByMe] = useState([]);
 
-    function  fetchData(){
-        axios.get('/api/posts?id=' + id)
-            .then(response => {
-                setPost(response.data.post);
-            });
-        axios.get('/api/posts?parent=' + id)
-            .then(response => {
-                console.log("res.data",response.data)
-                setReplies(response.data.posts);
-                setRepliesLikedByMe(response.data.idsLikedByMe || []);
-            })
+  function fetchData() {
+    axios.get('/api/posts?id=' + id)
+      .then(response => {
+        setPost(response.data.post);
+      });
+    axios.get('/api/posts?parent=' + id)
+      .then(response => {
+        setReplies(response.data.posts);
+        setRepliesLikedByMe(response.data.idsLikedByMe || []);
+      });
+  }
 
-    }
+  useEffect(() => {
+    if (!id) return;
+    fetchData();
+  }, [id]);
 
-    useEffect(() => {
-        if (!id) return;
+  return (
+    <Layout>
+      <div className="flex items-center px-4 sm:px-10 mt-5 mb-3">
+        <BackArrow destination="/" />
+        <h1 className="text-xl sm:text-2xl font-bold text-white ml-4">Realm</h1>
+      </div>
 
-        fetchData()
-    }, [id]);
+      {post && (
+        <div className="px-4 sm:px-10">
+          <PostContent {...post} big={true} />
+        </div>
+      )}
 
-    return (
-        <Layout>
-            <div className='flex '>
-            <h1 className='w-9 mr-5 mb-10 mt-5'>
-            <BackArrow destination='/'></BackArrow>
-            </h1>
-            <h1 className='text-2xl text-bold ml-4 mb-5 mt-5 text-white'>Realm</h1>
+      {!!userInfo && (
+        <div className="px-4 sm:px-10 mt-4">
+          <div className="border border-gray-600 rounded-md p-4">
+            <Postform onPost={fetchData} compact parent={id} />
+          </div>
+        </div>
+      )}
+
+      <div className="px-4 sm:px-10 mt-6 border-b border-gray-600 pb-2">
+        <h2 className="text-white text-lg sm:text-xl font-bold">Replies</h2>
+      </div>
+
+      <div className="px-4 sm:px-10 text-white">
+        {replies.length > 0 ? (
+          replies.map((reply) => (
+            <div
+              key={reply._id}
+              className="border-b border-gray-600 py-5 font-bold"
+            >
+              <PostContent
+                {...reply}
+                likedByMe={repliesLikedByMe.includes(reply._id)}
+              />
             </div>
-
-            {post && (
-                <>
-                    <PostContent {...post} big={true} />
-                    <div>
-
-                    </div>
-                </>
-
-            )}
-            {!!userInfo && (
-                <div className='px-7  border border-gray-600 mt-3'>
-                    <Postform onPost={fetchData} compact parent={id} />
-                </div>
-
-            )}
-            <div className='text-white text-xl font-bold  mt-3 border-b border-gray-600 pb-3'>
-                <p className='ml-5'>Replies</p>
-            </div>
-            <div className='text-white'>
-                {replies.length>0 && replies.map(reply => (
-                    <div className='border-b border-gray-600 p-5 font-bold ' key={reply._id}>
-                        <PostContent {...reply} likedByMe={repliesLikedByMe.includes(reply._id)} />
-                    </div>
-                ))}
-            </div>
-
-        </Layout>
-
-    );
+          ))
+        ) : (
+          <div className="text-gray-400 mt-4">No replies yet.</div>
+        )}
+      </div>
+    </Layout>
+  );
 }
