@@ -11,6 +11,7 @@ import Stark from './houses/stark';
 import Baratheon from './houses/barratheon';
 import Lannister from './houses/lannister';
 import Tully from './houses/tully';
+import Martell from './houses/martell';
 
 
 export default function UserPage() {
@@ -86,6 +87,8 @@ export default function UserPage() {
                 {userData?.sigil === "Lannister"&& <Lannister />}
 
                 {userData?.sigil === "Tully" && <Tully />}
+
+                {userData?.sigil === "Martell" && <Martell />}
                
               </div>
 
