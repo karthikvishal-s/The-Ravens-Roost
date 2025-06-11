@@ -9,6 +9,7 @@ import Link from "next/link";
 import Lannister from "./houses/lannister";
 import Baratheon from "./houses/barratheon";
 
+import Tully from "./houses/tully";
 
 
 
@@ -84,7 +85,20 @@ if (userInfo?.user?.sigil === "Greyjoy") {
               </div>
 
 
-              <Lannister />
+              <div>
+                             {userInfo?.user?.sigil === "Targaryen" && <Targaryen />}
+              
+              
+                             {userInfo?.user?.sigil === "Stark"&& <Stark />}
+              
+              
+                              {userInfo?.user?.sigil === "Baratheon"&& <Baratheon />}
+              
+                              {userInfo?.user?.sigil === "Lannister"&& <Lannister />}
+              
+                              {userInfo?.user?.sigil === "Tully" && <Tully />}
+                             
+                            </div>
               
             </Layout>
     )
