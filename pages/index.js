@@ -47,7 +47,7 @@ export default function Home() {
     <div className="relative min-h-screen bg-black text-white flex flex-col md:flex-row">
       {/* Left Sidebar */}
       <aside className="hidden md:flex fixed md:left-0 pt-20 md:pt-40 pl-6 pr-6 h-full border-r border-gray-700 flex-col gap-8 z-50 font-rocker font-bold">
-        <Link href="/"><SidebarIcon icon={<FaHome />} label="Home" /></Link>
+        <Link href="/login"><SidebarIcon icon={<FaHome />} label="Home" /></Link>
         <SidebarIcon icon={<FaSearch />} label="Explore" />
         <SidebarIcon icon={<FaEnvelope />} label="Messages" />
         <Link href="/savedposts"><SidebarIcon icon={<FaBookBookmark />} label="Scroll Vault" /></Link>
