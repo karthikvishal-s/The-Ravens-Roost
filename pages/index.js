@@ -65,7 +65,7 @@ export default function Home() {
 
       {/* Mobile Navigation Drawer */}
       {mobileNavOpen && (
-        <nav className="md:hidden fixed top-0 left-0 w-2/5 h-full bg-gray-900 border-r border-gray-700 z-40 p-6 flex flex-col gap-6 pt-34 ">
+        <nav className="md:hidden fixed top-0 left-0 w-3/7 h-full bg-gray-900 border-r border-gray-700 z-40 p-6 flex flex-col gap-6 pt-34 ">
           <Link href="/login" className="text-white" onClick={() => setMobileNavOpen(false)}><SidebarIcon icon={<FaHome />} label="Home" /></Link>
           <SidebarIcon icon={<FaSearch  className="text-gray-500"/>} label="Explore" />
           <SidebarIcon icon={<FaEnvelope  className="text-gray-500" />} label="Messages" />
@@ -85,11 +85,11 @@ export default function Home() {
       </div>
 
       {/* Main Content */}
-      <main className="flex-grow mt-24 md:mt-10 px-4 md:px-32 w-full max-w-5xl mx-auto pb-28">
+      <main className="flex-grow mt-14 md:mt-10 px-4 md:px-32 w-full max-w-5xl mx-auto pb-28">
         <h1 className="text-4xl md:text-6xl font-bold p-4 text-yellow-500 text-center font-ewert">Feed</h1>
 
         {/* Postform inline as original */}
-        <div className="flex justify-center mb-10">
+        <div className="flex justify-center relative -top-15">
           <Postform onPost={fetchHomePosts} />
         </div>
 
@@ -97,7 +97,7 @@ export default function Home() {
         <Layout>
           {posts.length > 0 ? (
             posts.map((post) => (
-              <div key={post._id} className="border border-gray-500 p-4 md:p-5 font-bold w-full mb-4">
+              <div key={post._id} className="border border-gray-500 p-2 md:p-5 font-bold w-full mb-4">
                 <PostContent
                   {...post}
                   likedByMe={idsLikedByMe.includes(post._id)}

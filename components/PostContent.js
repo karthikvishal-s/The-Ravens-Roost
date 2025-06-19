@@ -26,7 +26,7 @@ export default function PostContent({
   console.log("savedByMe", savedByMe);
   return (
     <>
-      <div className="flex gap-5 p-4">
+      <div className="flex gap-5 p-4 ">
         {/* Avatar */}
         <Link href={`/${author?.username || "unknown"}`} className="cursor-pointer">
           <Avatar src={author?.image} />
