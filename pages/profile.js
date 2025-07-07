@@ -11,7 +11,7 @@ import Baratheon from "./houses/barratheon";
 import Tully from "./houses/tully";
 
 export default function Profile() {
-  const { userInfo, UserInfoStatus, setUserInfo } = useUserInfo();
+  const { userInfo} = useUserInfo();
   console.log("userInfo for  me", userInfo);
 
   let btnclr = "";

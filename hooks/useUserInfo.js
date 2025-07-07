@@ -1,8 +1,12 @@
+//This useUserInfo is a custom hook where we get the details of the user... using
+// useSession is used..
+
 import { useSession } from "next-auth/react";
 import { useEffect, useState } from "react";
 
 export default function useUserInfo() {
   const { data: session, status: sessionStatus } = useSession();
+  //data as session and status as sessionstatus....
   const [userInfo, setUserInfo] = useState(null);
   const [status, setStatus] = useState("loading");
 
