@@ -92,7 +92,7 @@ export default function Home() {
 
       {/* Main Content */}
       <main className="flex-grow mt-14 md:mt-10 px-4 md:px-32 w-full max-w-5xl mx-auto pb-28">
-        <h1 className="text-4xl md:text-6xl font-bold p-4 text-yellow-500 text-center font-ewert">Feed</h1>
+        <h1 className="text-4xl md:text-6xl font-bold p-4 text-yellow-500 text-center font-ewert ml-40">Feed</h1>
 
         {/* Postform inline as original */}
         <div className="flex justify-center relative -top-15">

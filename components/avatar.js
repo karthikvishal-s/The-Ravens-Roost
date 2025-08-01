@@ -4,7 +4,7 @@ export default function Avatar({ src, profile = false }) {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(false);
 
-  const size = profile ? "w-40 h-40" : "w-12 h-12";
+  const size = profile ? "w-40 h-40" : "w-22 h-22";
 
   return (
     <div className={`relative mt-2 ml-2 ${size}`}>
