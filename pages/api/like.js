@@ -1,5 +1,4 @@
 import { initMongoose } from "@/lib/mongoose";
-
 import { authOptions } from "./auth/[...nextauth]";
 import { getServerSession } from "next-auth/next";
 import Like from "@/models/Like";
@@ -10,6 +9,7 @@ import Post from "@/models/Post";
 async function updateLikesCount(postId) {
     const post = await Post.findById(postId);
     post.likesCount = await Like.countDocuments({ post: postId });
+    //eventough if we increase the value in db , it will automatically count the docs and become normal..
     await post.save();
 }
 

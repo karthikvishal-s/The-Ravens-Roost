@@ -16,10 +16,10 @@
     "lucide-react": "^0.513.0",
     "mongodb": "^6.16.0",
     "mongoose": "^8.15.0",
-    "next": "15.3.2",
+    "next": "^15.4.5",
     "next-auth": "^4.24.11",
-    "react": "^19.0.0",
-    "react-dom": "^19.0.0",
+    "react": "^19.1.1",
+    "react-dom": "^19.1.1",
     "react-icons": "^5.5.0",
     "react-router-dom": "^7.6.1",
     "react-time-ago": "^7.3.3"

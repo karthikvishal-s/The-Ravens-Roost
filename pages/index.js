@@ -44,16 +44,18 @@ export default function Home() {
   if (!userInfo?.user?.username) return <UsernameForm />;
 
   return (
-    <div className="relative min-h-screen bg-black text-white flex flex-col md:flex-row">
+    <div className="relative min-h-screen bg-black text-white flex flex-col">
       {/* Left Sidebar */}
-      <aside className="hidden md:flex fixed md:left-0 pt-20 md:pt-40 pl-6 pr-6 h-full border-r border-gray-700 flex-col gap-8 z-50 font-rocker font-bold">
-        <Link href="/login"><SidebarIcon icon={<FaHome />} label="Home" /></Link>
-        <SidebarIcon icon={<FaSearch />} label="Explore" />
-        <SidebarIcon icon={<FaEnvelope />} label="Messages" />
-        <Link href="/savedposts"><SidebarIcon icon={<FaBookBookmark />} label="Scroll Vault" /></Link>
-        <Link href="/profile"><SidebarIcon icon={<GiPlagueDoctorProfile />} label="Profile" /></Link>
-        <SidebarIcon icon={<IoIosMore />} label="More" />
-      </aside>
+
+    <div className="flex  ">
+      <div className="border md:justify-center md:items-center md:text-center w-200">
+        navbar
+      </div>
+    </div>
+
+
+
+      
 
       {/* Hamburger & Mobile Nav Toggle */}
       <div className="md:hidden fixed top-4 left-4 z-50">
