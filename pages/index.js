@@ -44,14 +44,18 @@ export default function Home() {
   if (!userInfo?.user?.username) return <UsernameForm />;
 
   return (
-    <div className="relative min-h-screen bg-black text-white flex flex-col">
+    <div className="relative min-h-screen bg-black text-white flex ">
       {/* Left Sidebar */}
 
-    <div className="flex  ">
-      <div className="border md:justify-center md:items-center md:text-center w-200">
-        navbar
-      </div>
-    </div>
+      <aside className="hidden md:flex fixed md:left-0 pt-20 md:pt-90  md:ml-20 pl-6 pr-6 h-full border-gray-700 flex-col gap-8 z-50 font-rocker font-bold">
+        <Link href="/login"><SidebarIcon icon={<FaHome />} label="Home" /></Link>
+        <SidebarIcon icon={<FaSearch />} label="Explore" />
+        <SidebarIcon icon={<FaEnvelope />} label="Messages" />
+        <Link href="/savedposts"><SidebarIcon icon={<FaBookBookmark />} label="Scroll Vault" /></Link>
+        <Link href="/profile"><SidebarIcon icon={<GiPlagueDoctorProfile />} label="Profile" /></Link>
+        <SidebarIcon icon={<IoIosMore />} label="More" />
+      </aside>
+
 
 
 
@@ -67,7 +71,7 @@ export default function Home() {
 
       {/* Mobile Navigation Drawer */}
       {mobileNavOpen && (
-        <nav className="md:hidden fixed top-0 left-0 w-3/7 h-full bg-gray-900 border-r border-gray-700 z-40 p-6 flex flex-col gap-6 pt-34 ">
+        <nav className="md:hidden fixed top-0 left-0 w-3/7 h-full bg-gray-900 border-r border-gray-700 z-40 p-6 flex flex-col gap-6 pt-44 ">
           <Link href="/login" className="text-white" onClick={() => setMobileNavOpen(false)}><SidebarIcon icon={<FaHome />} label="Home" /></Link>
           <SidebarIcon icon={<FaSearch  className="text-gray-500"/>} label="Explore" />
           <SidebarIcon icon={<FaEnvelope  className="text-gray-500" />} label="Messages" />
@@ -119,7 +123,7 @@ export default function Home() {
 
 function SidebarIcon({ icon, label }) {
   return (
-    <div className=" flex items-center gap-3 text-2xl md:text-3xl p-2 px-4 hover:bg-gray-800 hover:text-yellow-400 cursor-pointer rounded-full transition-transform duration-200 transform hover:scale-105">
+    <div className=" flex items-center gap-3 text-4xl md:text-4xl p-2 px-4 hover:bg-gray-800 hover:text-yellow-400 cursor-pointer rounded-full transition-transform duration-200 transform hover:scale-105">
       {icon}
       <span className="text-base md:text-lg font-semibold">{label}</span>
     </div>
